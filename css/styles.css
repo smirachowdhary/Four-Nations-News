@@ -191,3 +191,71 @@ footer{
         grid-template-columns:1fr;
     }
 }
+
+/* EXPLORE THE WORLD */
+
+.world-section{
+    max-width:1200px;
+    margin:30px auto;
+    padding:0 20px;
+}
+
+.world-section h2{
+    font-size:2.4rem;
+    margin-bottom:20px;
+}
+
+.worlds{
+    display:grid;
+    grid-template-columns:repeat(5,1fr);
+    gap:15px;
+}
+
+.world-card{
+    background:#14274e;
+    color:white;
+    text-align:center;
+    padding:25px 10px;
+    font-weight:700;
+    border-radius:10px;
+    cursor:pointer;
+    transition:.2s;
+}
+
+.world-card:hover{
+    background:#1f3d73;
+    transform:translateY(-3px);
+}
+
+/* TRENDING */
+
+.trending{
+    max-width:1200px;
+    margin:20px auto 40px;
+    padding:0 20px;
+}
+
+.trending h2{
+    font-size:2.4rem;
+    margin-bottom:20px;
+}
+
+.trending ol{
+    background:white;
+    border-radius:10px;
+    padding:25px 40px;
+    box-shadow:0 2px 8px rgba(0,0,0,.08);
+}
+
+.trending li{
+    margin:12px 0;
+    font-size:1.1rem;
+}
+
+@media(max-width:900px){
+
+    .worlds{
+        grid-template-columns:1fr;
+    }
+
+}
