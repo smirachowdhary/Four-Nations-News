@@ -6,26 +6,17 @@ import {
 }
 from "https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
 
-const ADMIN_EMAIL =
-    "smirachowdhary@gmail.com";
-
 onAuthStateChanged(auth, (user) => {
+
+    console.log(user);
 
     if(!user){
 
-        window.location.href = "login.html";
+        alert("NO USER FOUND");
         return;
     }
 
-    if(user.email !== ADMIN_EMAIL){
-
-        alert("Not authorized");
-
-        signOut(auth);
-
-        window.location.href =
-            "index.html";
-    }
+    alert("SIGNED IN AS: " + user.email);
 
 });
 
@@ -35,7 +26,6 @@ document
 
     await signOut(auth);
 
-    window.location.href =
-        "index.html";
+    alert("Signed out");
 
 });
