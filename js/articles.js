@@ -45,17 +45,6 @@ async function loadArticles() {
 
     });
 
-    if(articles.length === 0){
-
-        heroTitle.textContent =
-            "No Articles Yet";
-
-        heroSummary.textContent =
-            "Publish your first article from the admin dashboard.";
-
-        return;
-    }
-
     const featuredArticle =
         articles.find(
             article => article.featured
@@ -69,12 +58,8 @@ async function loadArticles() {
         heroSummary.textContent =
             featuredArticle.summary;
 
-        if(featuredArticle.featuredImage){
-
-            heroImage.src =
-                featuredArticle.featuredImage;
-
-        }
+        heroImage.src =
+            featuredArticle.featuredImage;
 
     }
 
@@ -92,7 +77,7 @@ async function loadArticles() {
     }
 
     articles
-    .slice(0, 5)
+    .slice(0,5)
     .forEach(article => {
 
         trendingList.innerHTML += `
@@ -101,54 +86,45 @@ async function loadArticles() {
 
     });
 
-    const displayArticles = [];
-
     articles.forEach(article => {
-
-        for(let i = 0; i < 8; i++){
-
-            displayArticles.push(article);
-
-        }
-
-    });
-
-    displayArticles.forEach(article => {
-
-        const image =
-            article.featuredImage ||
-            article.image ||
-            "https://picsum.photos/400/300";
 
         articleGrid.innerHTML += `
 
-            <div class="card">
+            <a
+                href="article.html?id=${article.id}"
+                style="
+                    text-decoration:none;
+                    color:inherit;
+                ">
 
-                <img
-                    src="${image}"
-                    alt="${article.title}">
+                <div class="card">
 
-                <div class="card-content">
+                    <img
+                        src="${article.featuredImage}">
 
-                    <h3>
-                        ${article.title}
-                    </h3>
+                    <div class="card-content">
 
-                    <p>
-                        ${article.summary}
-                    </p>
+                        <h3>
+                            ${article.title}
+                        </h3>
 
-                    <p>
+                        <p>
+                            ${article.summary}
+                        </p>
 
-                        <strong>
-                            ${article.author}
-                        </strong>
+                        <p>
 
-                    </p>
+                            <strong>
+                                ${article.author}
+                            </strong>
+
+                        </p>
+
+                    </div>
 
                 </div>
 
-            </div>
+            </a>
 
         `;
 
