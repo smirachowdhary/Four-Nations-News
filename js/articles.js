@@ -21,7 +21,7 @@ async function loadArticles() {
 
         const article = doc.data();
 
-        for(let i = 0; i < 6; i++){
+        for(let i = 0; i < 8; i++){
             articles.push(article);
         }
 
