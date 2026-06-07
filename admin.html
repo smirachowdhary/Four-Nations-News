@@ -1,17 +1,177 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Admin Dashboard</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Four Nations News Admin</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family:Arial, Helvetica, sans-serif;
+    background:#f4f4f4;
+}
+
+header{
+    background:#14274e;
+    color:white;
+    padding:20px 40px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+header h1{
+    font-size:2rem;
+}
+
+.logout-btn{
+    padding:10px 16px;
+    border:none;
+    border-radius:8px;
+    cursor:pointer;
+}
+
+.container{
+    max-width:1200px;
+    margin:30px auto;
+    padding:0 20px;
+}
+
+.card{
+    background:white;
+    border-radius:12px;
+    padding:25px;
+    margin-bottom:25px;
+    box-shadow:0 2px 8px rgba(0,0,0,.08);
+}
+
+.card h2{
+    margin-bottom:20px;
+}
+
+input,
+textarea,
+select{
+    width:100%;
+    padding:12px;
+    margin-bottom:15px;
+    border:1px solid #ccc;
+    border-radius:8px;
+}
+
+textarea{
+    height:120px;
+    resize:vertical;
+}
+
+.publish-btn{
+    background:#14274e;
+    color:white;
+    border:none;
+    padding:14px 20px;
+    border-radius:8px;
+    cursor:pointer;
+}
+
+.article-list{
+    display:grid;
+    gap:15px;
+}
+
+.article-item{
+    border:1px solid #ddd;
+    padding:15px;
+    border-radius:8px;
+}
+
+.actions{
+    margin-top:10px;
+}
+
+.actions button{
+    margin-right:10px;
+    padding:8px 14px;
+}
+
+</style>
 </head>
+
 <body>
 
-<h1>Admin Dashboard</h1>
+<header>
 
-<p>You are logged in.</p>
+    <h1>Four Nations News Admin</h1>
 
-<button id="logoutBtn">
-    Logout
-</button>
+    <button
+        id="logoutBtn"
+        class="logout-btn">
+        Logout
+    </button>
+
+</header>
+
+<div class="container">
+
+    <div class="card">
+
+        <h2>Create Article</h2>
+
+        <input
+            id="title"
+            placeholder="Article Title">
+
+        <input
+            id="author"
+            placeholder="Author">
+
+        <input
+            id="image"
+            placeholder="Image URL">
+
+        <select id="category">
+            <option>ATLA</option>
+            <option>LOK</option>
+            <option>Seven Havens</option>
+            <option>Books / Comics</option>
+            <option>Other</option>
+        </select>
+
+        <textarea
+            id="summary"
+            placeholder="Article Summary"></textarea>
+
+        <button
+            class="publish-btn"
+            id="publishBtn">
+            Publish Article
+        </button>
+
+    </div>
+
+    <div class="card">
+
+        <h2>Existing Articles</h2>
+
+        <div
+            id="articleList"
+            class="article-list">
+
+            <div class="article-item">
+                Articles will appear here.
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
 
 <script type="module" src="js/admin.js"></script>
 
