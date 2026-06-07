@@ -7,7 +7,7 @@ import {
 from "https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
 
 const ADMIN_EMAIL =
-    "your@email.com";
+    "smirachowdhary@gmail.com";
 
 onAuthStateChanged(auth, (user) => {
 
