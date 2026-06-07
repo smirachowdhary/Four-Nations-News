@@ -1,1 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Article</title>
 
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family:Arial, Helvetica, sans-serif;
+    background:#f4f4f4;
+}
+
+header{
+    background:#14274e;
+    color:white;
+    padding:20px;
+}
+
+header a{
+    color:white;
+    text-decoration:none;
+    font-weight:bold;
+}
+
+.container{
+    max-width:1200px;
+    margin:30px auto;
+    padding:0 20px;
+}
+
+.article{
+    background:white;
+    padding:30px;
+    border-radius:12px;
+    box-shadow:0 2px 8px rgba(0,0,0,.08);
+}
+
+.article h1{
+    margin-bottom:15px;
+}
+
+.meta{
+    color:#666;
+    margin-bottom:20px;
+}
+
+.featured-image{
+    width:100%;
+    max-height:600px;
+    object-fit:cover;
+    border-radius:10px;
+    margin-bottom:25px;
+}
+
+.gallery{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+    gap:15px;
+    margin:30px 0;
+}
+
+.gallery img{
+    width:100%;
+    height:250px;
+    object-fit:cover;
+    border-radius:10px;
+}
+
+.content{
+    line-height:1.8;
+    font-size:1.1rem;
+    white-space:pre-wrap;
+}
+
+</style>
+</head>
+
+<body>
+
+<header>
+
+    <a href="index.html">
+        ← Back To Home
+    </a>
+
+</header>
+
+<div class="container">
+
+    <div class="article">
+
+        <h1 id="title">
+            Loading...
+        </h1>
+
+        <div class="meta">
+
+            <span id="author"></span>
+
+            •
+
+            <span id="category"></span>
+
+        </div>
+
+        <img
+            id="featuredImage"
+            class="featured-image"
+            src="">
+
+        <div
+            id="gallery"
+            class="gallery">
+        </div>
+
+        <div
+            id="content"
+            class="content">
+        </div>
+
+    </div>
+
+</div>
+
+<script type="module" src="js/article.js"></script>
+
+</body>
+</html>
