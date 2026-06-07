@@ -31,7 +31,9 @@ onAuthStateChanged(auth, (user) => {
 
         signOut(auth);
 
-        window.location.href = "index.html";
+        window.location.href =
+            "index.html";
+
         return;
     }
 
@@ -60,22 +62,40 @@ document
     const author =
         document.getElementById("author").value;
 
-    const image =
-        document.getElementById("image").value;
+    const category =
+        document.getElementById("category").value;
+
+    const image1 =
+        document.getElementById("image1").value;
+
+    const image2 =
+        document.getElementById("image2").value;
+
+    const image3 =
+        document.getElementById("image3").value;
+
+    const image4 =
+        document.getElementById("image4").value;
 
     const summary =
         document.getElementById("summary").value;
 
-    const category =
-        document.getElementById("category").value;
+    const content =
+        document.getElementById("content").value;
+
+    const featured =
+        document.getElementById("featured").checked;
+
+    const breaking =
+        document.getElementById("breaking").checked;
 
     if(
         !title ||
         !author ||
-        !image ||
+        !image1 ||
         !summary
     ){
-        alert("Fill out all fields");
+        alert("Fill out all required fields");
         return;
     }
 
@@ -86,26 +106,38 @@ document
             {
                 title,
                 author,
-                image,
-                summary,
                 category,
-                createdAt: Date.now()
+
+                summary,
+                content,
+
+                featured,
+                breaking,
+
+                featuredImage:image1,
+
+                images:[
+                    image1,
+                    image2,
+                    image3,
+                    image4
+                ].filter(Boolean),
+
+                createdAt:Date.now()
             }
         );
 
         alert("Article Published");
 
-        document.getElementById("title").value = "";
-        document.getElementById("author").value = "";
-        document.getElementById("image").value = "";
-        document.getElementById("summary").value = "";
-
-        loadArticles();
+        location.reload();
 
     }catch(error){
 
         console.error(error);
-        alert("Error publishing article");
+
+        alert(
+            "Error publishing article"
+        );
 
     }
 
@@ -135,7 +167,23 @@ async function loadArticles(){
                 <h3>${article.title}</h3>
 
                 <p>
+                    <strong>Author:</strong>
                     ${article.author}
+                </p>
+
+                <p>
+                    <strong>Category:</strong>
+                    ${article.category}
+                </p>
+
+                <p>
+                    <strong>Featured:</strong>
+                    ${article.featured ? "Yes" : "No"}
+                </p>
+
+                <p>
+                    <strong>Breaking:</strong>
+                    ${article.breaking ? "Yes" : "No"}
                 </p>
 
                 <div class="actions">
@@ -170,8 +218,9 @@ async function loadArticles(){
                         "Delete article?"
                     );
 
-                if(!confirmDelete)
+                if(!confirmDelete){
                     return;
+                }
 
                 await deleteDoc(
                     doc(
