@@ -36,10 +36,11 @@ header h1{
     border:none;
     border-radius:8px;
     cursor:pointer;
+    font-weight:bold;
 }
 
 .container{
-    max-width:1200px;
+    max-width:1400px;
     margin:30px auto;
     padding:0 20px;
 }
@@ -64,11 +65,19 @@ select{
     margin-bottom:15px;
     border:1px solid #ccc;
     border-radius:8px;
+    font-size:1rem;
 }
 
 textarea{
-    height:120px;
     resize:vertical;
+}
+
+#summary{
+    height:120px;
+}
+
+#content{
+    height:250px;
 }
 
 .publish-btn{
@@ -78,6 +87,30 @@ textarea{
     padding:14px 20px;
     border-radius:8px;
     cursor:pointer;
+    font-size:1rem;
+    font-weight:bold;
+}
+
+.publish-btn:hover{
+    background:#1f3d73;
+}
+
+.checkbox-row{
+    display:flex;
+    gap:30px;
+    margin-bottom:20px;
+}
+
+.checkbox-row label{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    font-weight:bold;
+}
+
+.checkbox-row input{
+    width:auto;
+    margin:0;
 }
 
 .article-list{
@@ -87,17 +120,33 @@ textarea{
 
 .article-item{
     border:1px solid #ddd;
-    padding:15px;
-    border-radius:8px;
+    padding:20px;
+    border-radius:10px;
+}
+
+.article-item h3{
+    margin-bottom:10px;
+}
+
+.article-item p{
+    margin-bottom:8px;
 }
 
 .actions{
-    margin-top:10px;
+    margin-top:15px;
 }
 
-.actions button{
-    margin-right:10px;
-    padding:8px 14px;
+.delete-btn{
+    background:#d90429;
+    color:white;
+    border:none;
+    padding:10px 16px;
+    border-radius:8px;
+    cursor:pointer;
+}
+
+.delete-btn:hover{
+    background:#b00020;
 }
 
 </style>
@@ -131,10 +180,6 @@ textarea{
             id="author"
             placeholder="Author">
 
-        <input
-            id="image"
-            placeholder="Image URL">
-
         <select id="category">
             <option>ATLA</option>
             <option>LOK</option>
@@ -143,9 +188,43 @@ textarea{
             <option>Other</option>
         </select>
 
+        <input
+            id="image1"
+            placeholder="Featured Image URL">
+
+        <input
+            id="image2"
+            placeholder="Additional Image URL">
+
+        <input
+            id="image3"
+            placeholder="Additional Image URL">
+
+        <input
+            id="image4"
+            placeholder="Additional Image URL">
+
         <textarea
             id="summary"
             placeholder="Article Summary"></textarea>
+
+        <textarea
+            id="content"
+            placeholder="Full Article Content"></textarea>
+
+        <div class="checkbox-row">
+
+            <label>
+                <input type="checkbox" id="featured">
+                Featured Story
+            </label>
+
+            <label>
+                <input type="checkbox" id="breaking">
+                Breaking News
+            </label>
+
+        </div>
 
         <button
             class="publish-btn"
@@ -162,10 +241,6 @@ textarea{
         <div
             id="articleList"
             class="article-list">
-
-            <div class="article-item">
-                Articles will appear here.
-            </div>
 
         </div>
 
