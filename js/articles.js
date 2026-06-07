@@ -51,5 +51,5 @@ async function loadArticles() {
 
     });
 }
-
+  
 loadArticles();
