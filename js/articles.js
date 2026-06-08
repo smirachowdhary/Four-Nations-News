@@ -185,14 +185,14 @@ function setupHero(){
 
 function setupTrending(){
 
-    const trendingList =
+    const trendingCards =
         document.getElementById(
-            "trendingList"
+            "trendingCards"
         );
 
-    if(!trendingList) return;
+    if(!trendingCards) return;
 
-    trendingList.innerHTML = "";
+    trendingCards.innerHTML = "";
 
     const trendingArticles =
 
@@ -216,27 +216,39 @@ function setupTrending(){
 
     trendingArticles.forEach(article=>{
 
-        trendingList.innerHTML += `
+        trendingCards.innerHTML += `
 
-            <li>
+            <a
+                href="article.html?id=${article.id}"
+                class="trending-card"
+            >
 
-                <a
-                    href="article.html?id=${article.id}"
-                    style="
-                        text-decoration:none;
-                        color:inherit;
-                    "
+                <img
+                    src="${
+                        article.featuredImage ||
+                        "https://picsum.photos/500"
+                    }"
                 >
 
+                <div>
+
+                    <h3>
                         ${article.title}
+                    </h3>
 
-                        • 👁️ ${article.views || 0}
+                    <p>
 
-                        • 👍 ${article.likes || 0}
+                        👁️ ${article.views || 0}
 
-                </a>
+                        •
 
-            </li>
+                        👍 ${article.likes || 0}
+
+                    </p>
+
+                </div>
+
+            </a>
 
         `;
 
