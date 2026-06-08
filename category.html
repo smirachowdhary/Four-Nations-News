@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+>
+
+<title>Category</title>
+
+<link
+    rel="stylesheet"
+    href="css/styles.css"
+>
+
+</head>
+
+<body>
+
+<header>
+
+    <div class="topbar">
+
+        <h1>
+
+            <a
+                href="index.html"
+                style="
+                    text-decoration:none;
+                    color:black;
+                "
+            >
+                Four Nations News
+            </a>
+
+        </h1>
+
+        <input
+            id="search"
+            placeholder="Search articles..."
+        >
+
+    </div>
+
+    <nav>
+
+        <a href="index.html">
+            Home
+        </a>
+
+        <a href="category.html?category=ATLA">
+            ATLA
+        </a>
+
+        <a href="category.html?category=LOK">
+            LOK
+        </a>
+
+        <a href="category.html?category=Seven Havens">
+            Seven Havens
+        </a>
+
+        <a href="category.html?category=Books/Comics">
+            Books / Comics
+        </a>
+
+        <a href="category.html?category=Other">
+            Other
+        </a>
+
+    </nav>
+
+</header>
+
+<main>
+
+    <h2 id="categoryTitle">
+
+        Category
+
+    </h2>
+
+    <div
+        id="articleGrid"
+        class="article-grid"
+    ></div>
+
+</main>
+
+<footer>
+
+    © 2026 Four Nations News
+
+</footer>
+
+<script
+    type="module"
+    src="js/articles.js"
+></script>
+
+<script>
+
+const params =
+    new URLSearchParams(
+        window.location.search
+    );
+
+const category =
+    params.get("category");
+
+if(category){
+
+    document.getElementById(
+        "categoryTitle"
+    ).textContent =
+        category;
+
+}
+
+</script>
+
+</body>
+</html>
