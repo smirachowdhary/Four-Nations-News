@@ -19,7 +19,9 @@ async function loadSiteSettings(){
     const siteSnap =
         await getDoc(siteRef);
 
-    if(!siteSnap.exists()) return;
+    if(!siteSnap.exists()){
+        return;
+    }
 
     const settings =
         siteSnap.data();
@@ -94,7 +96,6 @@ async function loadArticles(){
     );
 
     setupHero();
-    setupBreaking();
     setupTrending();
     updateStats();
     renderArticles();
@@ -108,43 +109,36 @@ function setupHero(){
             article => article.featured
         );
 
-    if(!featured) return;
-
-    document.getElementById(
-        "heroTitle"
-    ).textContent =
-        featured.title;
-
-    document.getElementById(
-        "heroSummary"
-    ).textContent =
-        featured.summary;
-
-    if(featured.featuredImage){
-
-        document.getElementById(
-            "heroImage"
-        ).src =
-            featured.featuredImage;
-
+    if(!featured){
+        return;
     }
 
-}
+    const heroTitle =
+        document.getElementById("heroTitle");
 
-function setupBreaking(){
+    const heroSummary =
+        document.getElementById("heroSummary");
 
-    const breaking =
-        allArticles.find(
-            article => article.breaking
-        );
+    const heroImage =
+        document.getElementById("heroImage");
 
-    if(!breaking) return;
+    if(heroTitle){
+        heroTitle.textContent =
+            featured.title;
+    }
 
-    document.getElementById(
-        "breakingBanner"
-    ).textContent =
-        "BREAKING NEWS: " +
-        breaking.title;
+    if(heroSummary){
+        heroSummary.textContent =
+            featured.summary;
+    }
+
+    if(
+        heroImage &&
+        featured.featuredImage
+    ){
+        heroImage.src =
+            featured.featuredImage;
+    }
 
 }
 
@@ -155,7 +149,9 @@ function setupTrending(){
             "trendingList"
         );
 
-    if(!trendingList) return;
+    if(!trendingList){
+        return;
+    }
 
     trendingList.innerHTML = "";
 
@@ -179,10 +175,8 @@ function updateStats(){
         );
 
     if(articleCount){
-
         articleCount.textContent =
             allArticles.length;
-
     }
 
 }
@@ -194,7 +188,9 @@ function renderArticles(){
             "articleGrid"
         );
 
-    if(!articleGrid) return;
+    if(!articleGrid){
+        return;
+    }
 
     articleGrid.innerHTML = "";
 
@@ -247,38 +243,29 @@ function renderArticles(){
 
         articleGrid.innerHTML += `
 
-        <a
-            href="article.html?id=${article.id}"
-            style="
-                text-decoration:none;
-                color:inherit;
-            ">
+        <div class="card">
 
-            <div class="card">
+            <img
+                src="${
+                    article.featuredImage ||
+                    'https://picsum.photos/500'
+                }">
 
-                <img
-                    src="${
-                        article.featuredImage ||
-                        "https://picsum.photos/500"
-                    }">
+            <div class="card-content">
 
-                <div class="card-content">
+                <h3>${article.title}</h3>
 
-                    <h3>${article.title}</h3>
+                <p>${article.summary}</p>
 
-                    <p>${article.summary}</p>
-
-                    <p>
-                        <strong>
-                            ${article.author}
-                        </strong>
-                    </p>
-
-                </div>
+                <p>
+                    <strong>
+                        ${article.author}
+                    </strong>
+                </p>
 
             </div>
 
-        </a>
+        </div>
 
         `;
 
@@ -293,7 +280,9 @@ function setupSearch(){
             "search"
         );
 
-    if(!searchBox) return;
+    if(!searchBox){
+        return;
+    }
 
     searchBox.addEventListener(
         "input",
