@@ -1,135 +1,182 @@
-import { db } from "./firebase.js";
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Four Nations News Admin</title>
 
-import {
-    collection,
-    getDocs
-}
-from "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
+<style>
 
-async function loadArticles() {
-
-    const articleGrid =
-        document.getElementById("articleGrid");
-
-    const trendingList =
-        document.getElementById("trendingList");
-
-    const heroImage =
-        document.getElementById("heroImage");
-
-    const heroTitle =
-        document.getElementById("heroTitle");
-
-    const heroSummary =
-        document.getElementById("heroSummary");
-
-    const breakingBanner =
-        document.getElementById("breakingBanner");
-
-    articleGrid.innerHTML = "";
-    trendingList.innerHTML = "";
-
-    const snapshot =
-        await getDocs(
-            collection(db, "articles")
-        );
-
-    const articles = [];
-
-    snapshot.forEach((doc) => {
-
-        articles.push({
-            id: doc.id,
-            ...doc.data()
-        });
-
-    });
-
-    const featuredArticle =
-        articles.find(
-            article => article.featured
-        );
-
-    if(featuredArticle){
-
-        heroTitle.textContent =
-            featuredArticle.title;
-
-        heroSummary.textContent =
-            featuredArticle.summary;
-
-        heroImage.src =
-            featuredArticle.featuredImage;
-
-    }
-
-    const breakingArticle =
-        articles.find(
-            article => article.breaking
-        );
-
-    if(breakingArticle){
-
-        breakingBanner.textContent =
-            "BREAKING NEWS: " +
-            breakingArticle.title;
-
-    }
-
-    articles
-    .slice(0,5)
-    .forEach(article => {
-
-        trendingList.innerHTML += `
-            <li>${article.title}</li>
-        `;
-
-    });
-
-    articles.forEach(article => {
-
-        articleGrid.innerHTML += `
-
-            <a
-                href="article.html?id=${article.id}"
-                style="
-                    text-decoration:none;
-                    color:inherit;
-                ">
-
-                <div class="card">
-
-                    <img
-                        src="${article.featuredImage}">
-
-                    <div class="card-content">
-
-                        <h3>
-                            ${article.title}
-                        </h3>
-
-                        <p>
-                            ${article.summary}
-                        </p>
-
-                        <p>
-
-                            <strong>
-                                ${article.author}
-                            </strong>
-
-                        </p>
-
-                    </div>
-
-                </div>
-
-            </a>
-
-        `;
-
-    });
-
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
 }
 
-loadArticles();
+body{
+    font-family:Arial, Helvetica, sans-serif;
+    background:#f4f4f4;
+}
+
+header{
+    background:#14274e;
+    color:white;
+    padding:20px 40px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+header h1{
+    font-size:2rem;
+}
+
+.logout-btn{
+    padding:10px 16px;
+    border:none;
+    border-radius:8px;
+    cursor:pointer;
+    font-weight:bold;
+}
+
+.container{
+    max-width:1400px;
+    margin:30px auto;
+    padding:0 20px;
+}
+
+.card{
+    background:white;
+    border-radius:12px;
+    padding:25px;
+    margin-bottom:25px;
+    box-shadow:0 2px 8px rgba(0,0,0,.08);
+}
+
+input,
+textarea,
+select{
+    width:100%;
+    padding:12px;
+    margin-bottom:15px;
+    border:1px solid #ccc;
+    border-radius:8px;
+}
+
+textarea{
+    resize:vertical;
+}
+
+#summary{
+    height:120px;
+}
+
+#content{
+    height:250px;
+}
+
+.publish-btn{
+    background:#14274e;
+    color:white;
+    border:none;
+    padding:14px 20px;
+    border-radius:8px;
+    cursor:pointer;
+}
+
+.article-list{
+    display:grid;
+    gap:15px;
+}
+
+.article-item{
+    border:1px solid #ddd;
+    padding:20px;
+    border-radius:10px;
+}
+
+.actions{
+    margin-top:15px;
+}
+
+.actions button{
+    margin-right:10px;
+    padding:10px 14px;
+}
+
+</style>
+</head>
+
+<body>
+
+<header>
+
+    <h1>Four Nations News Admin</h1>
+
+    <button
+        id="logoutBtn"
+        class="logout-btn">
+        Logout
+    </button>
+
+</header>
+
+<div class="container">
+
+    <div class="card">
+
+        <h2>Create Article</h2>
+
+        <input id="title" placeholder="Article Title">
+
+        <input id="author" placeholder="Author">
+
+        <select id="category">
+            <option>ATLA</option>
+            <option>LOK</option>
+            <option>Seven Havens</option>
+            <option>Books / Comics</option>
+            <option>Other</option>
+        </select>
+
+        <input id="image1" placeholder="Featured Image URL">
+
+        <input id="image2" placeholder="Additional Image URL">
+
+        <input id="image3" placeholder="Additional Image URL">
+
+        <input id="image4" placeholder="Additional Image URL">
+
+        <textarea
+            id="summary"
+            placeholder="Article Summary"></textarea>
+
+        <textarea
+            id="content"
+            placeholder="Full Article Content"></textarea>
+
+        <button
+            id="publishBtn"
+            class="publish-btn">
+            Publish Article
+        </button>
+
+    </div>
+
+    <div class="card">
+
+        <h2>Existing Articles</h2>
+
+        <div
+            id="articleList"
+            class="article-list">
+        </div>
+
+    </div>
+
+</div>
+
+<script type="module" src="js/admin.js"></script>
+
+</body>
+</html>
