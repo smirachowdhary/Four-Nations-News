@@ -27,22 +27,16 @@ header{
     align-items:center;
 }
 
-header h1{
-    font-size:2rem;
-}
-
-.logout-btn{
-    padding:10px 16px;
-    border:none;
-    border-radius:8px;
-    cursor:pointer;
-    font-weight:bold;
-}
-
 .container{
     max-width:1400px;
     margin:30px auto;
     padding:0 20px;
+}
+
+.grid{
+    display:grid;
+    grid-template-columns:2fr 1fr;
+    gap:25px;
 }
 
 .card{
@@ -58,7 +52,7 @@ textarea,
 select{
     width:100%;
     padding:12px;
-    margin-bottom:15px;
+    margin-bottom:12px;
     border:1px solid #ccc;
     border-radius:8px;
 }
@@ -72,16 +66,29 @@ textarea{
 }
 
 #content{
-    height:250px;
+    height:220px;
+}
+
+button{
+    border:none;
+    padding:12px 18px;
+    border-radius:8px;
+    cursor:pointer;
 }
 
 .publish-btn{
     background:#14274e;
     color:white;
-    border:none;
-    padding:14px 20px;
-    border-radius:8px;
-    cursor:pointer;
+}
+
+.save-btn{
+    background:#198754;
+    color:white;
+    display:none;
+}
+
+.logout-btn{
+    background:white;
 }
 
 .article-list{
@@ -91,17 +98,23 @@ textarea{
 
 .article-item{
     border:1px solid #ddd;
-    padding:20px;
     border-radius:10px;
+    padding:15px;
 }
 
-.actions{
-    margin-top:15px;
-}
-
-.actions button{
+.edit-btn{
+    background:#0d6efd;
+    color:white;
     margin-right:10px;
-    padding:10px 14px;
+}
+
+.delete-btn{
+    background:#d90429;
+    color:white;
+}
+
+.featured-box{
+    margin:10px 0;
 }
 
 </style>
@@ -123,43 +136,153 @@ textarea{
 
 <div class="container">
 
-    <div class="card">
+    <div class="grid">
 
-        <h2>Create Article</h2>
+        <div>
 
-        <input id="title" placeholder="Article Title">
+            <div class="card">
 
-        <input id="author" placeholder="Author">
+                <h2>Create / Edit Article</h2>
 
-        <select id="category">
-            <option>ATLA</option>
-            <option>LOK</option>
-            <option>Seven Havens</option>
-            <option>Books / Comics</option>
-            <option>Other</option>
-        </select>
+                <input
+                    id="title"
+                    placeholder="Article Title">
 
-        <input id="image1" placeholder="Featured Image URL">
+                <input
+                    id="author"
+                    placeholder="Author">
 
-        <input id="image2" placeholder="Additional Image URL">
+                <select id="category">
 
-        <input id="image3" placeholder="Additional Image URL">
+                    <option>ATLA</option>
+                    <option>LOK</option>
+                    <option>Seven Havens</option>
+                    <option>Books / Comics</option>
+                    <option>Other</option>
 
-        <input id="image4" placeholder="Additional Image URL">
+                </select>
 
-        <textarea
-            id="summary"
-            placeholder="Article Summary"></textarea>
+                <input
+                    id="image1"
+                    placeholder="Featured Image URL">
 
-        <textarea
-            id="content"
-            placeholder="Full Article Content"></textarea>
+                <input
+                    id="image2"
+                    placeholder="Additional Image URL">
 
-        <button
-            id="publishBtn"
-            class="publish-btn">
-            Publish Article
-        </button>
+                <input
+                    id="image3"
+                    placeholder="Additional Image URL">
+
+                <input
+                    id="image4"
+                    placeholder="Additional Image URL">
+
+                <textarea
+                    id="summary"
+                    placeholder="Article Summary"></textarea>
+
+                <textarea
+                    id="content"
+                    placeholder="Full Article"></textarea>
+
+                <div class="featured-box">
+
+                    <label>
+
+                        <input
+                            type="checkbox"
+                            id="featured">
+
+                        Featured Story
+
+                    </label>
+
+                </div>
+
+                <div class="featured-box">
+
+                    <label>
+
+                        <input
+                            type="checkbox"
+                            id="breaking">
+
+                        Breaking News
+
+                    </label>
+
+                </div>
+
+                <button
+                    id="publishBtn"
+                    class="publish-btn">
+
+                    Publish
+
+                </button>
+
+                <button
+                    id="saveBtn"
+                    class="save-btn">
+
+                    Save Changes
+
+                </button>
+
+            </div>
+
+        </div>
+
+        <div>
+
+            <div class="card">
+
+                <h2>Character Spotlight</h2>
+
+                <input
+                    id="spotlightName"
+                    placeholder="Character Name">
+
+                <textarea
+                    id="spotlightDescription"
+                    placeholder="Character Description"></textarea>
+
+                <input
+                    id="spotlightImage"
+                    placeholder="Character Image URL">
+
+                <button
+                    id="saveSpotlight">
+
+                    Save Spotlight
+
+                </button>
+
+            </div>
+
+            <div class="card">
+
+                <h2>Avatar Quote</h2>
+
+                <textarea
+                    id="quoteText"
+                    placeholder="Quote"></textarea>
+
+                <input
+                    id="quoteAuthor"
+                    placeholder="Quote Author">
+
+                <button
+                    id="saveQuote">
+
+                    Save Quote
+
+                </button>
+
+            </div>
+
+        </div>
 
     </div>
 
