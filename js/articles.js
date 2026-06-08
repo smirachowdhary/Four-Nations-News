@@ -94,7 +94,10 @@ async function loadArticles(){
 
     const snapshot =
         await getDocs(
-            collection(db,"articles")
+            collection(
+                db,
+                "articles"
+            )
         );
 
     allArticles = [];
@@ -183,7 +186,6 @@ function setupHero(){
 function setupTrending(){
 
     const trendingList =
-
         document.getElementById(
             "trendingList"
         );
@@ -192,17 +194,47 @@ function setupTrending(){
 
     trendingList.innerHTML = "";
 
-    allArticles
+    const trendingArticles =
 
-    .slice(0,5)
+        [...allArticles]
 
-    .forEach(article=>{
+        .sort(
+
+            (a,b)=>
+
+            ((b.views || 0) +
+             (b.likes || 0))
+
+            -
+
+            ((a.views || 0) +
+             (a.likes || 0))
+
+        )
+
+        .slice(0,5);
+
+    trendingArticles.forEach(article=>{
 
         trendingList.innerHTML += `
 
             <li>
 
-                ${article.title}
+                <a
+                    href="article.html?id=${article.id}"
+                    style="
+                        text-decoration:none;
+                        color:inherit;
+                    "
+                >
+
+                        ${article.title}
+
+                        • 👁️ ${article.views || 0}
+
+                        • 👍 ${article.likes || 0}
+
+                </a>
 
             </li>
 
@@ -215,7 +247,6 @@ function setupTrending(){
 function updateStats(){
 
     const articleCount =
-
         document.getElementById(
             "articleCount"
         );
@@ -232,7 +263,6 @@ function updateStats(){
 function renderArticles(){
 
     const articleGrid =
-
         document.getElementById(
             "articleGrid"
         );
@@ -241,7 +271,8 @@ function renderArticles(){
 
     articleGrid.innerHTML = "";
 
-    let articles = [...allArticles];
+    let articles =
+        [...allArticles];
 
     if(pageCategory){
 
@@ -252,7 +283,6 @@ function renderArticles(){
             article =>
 
             article.category ===
-
             pageCategory
 
         );
@@ -262,11 +292,8 @@ function renderArticles(){
     const search =
 
         document
-
         .getElementById("search")
-
         ?.value
-
         ?.toLowerCase()
 
         || "";
@@ -287,15 +314,31 @@ function renderArticles(){
             ?.toLowerCase()
             .includes(search)
 
+            ||
+
+            article.content
+            ?.toLowerCase()
+            .includes(search)
+
+            ||
+
+            article.author
+            ?.toLowerCase()
+            .includes(search)
+
         );
 
     }
 
-    articles
+    const displayArticles =
 
-    .slice(0,4)
+        pageCategory
 
-    .forEach(article=>{
+        ? articles
+
+        : articles.slice(0,4);
+
+    displayArticles.forEach(article=>{
 
         articleGrid.innerHTML += `
 
@@ -309,18 +352,22 @@ function renderArticles(){
                 <img
                     src="${
                         article.featuredImage ||
-                        'https://picsum.photos/500'
+                        "https://picsum.photos/500"
                     }"
                 >
 
                 <div class="card-content">
 
                     <h3>
+
                         ${article.title}
+
                     </h3>
 
                     <p>
+
                         ${article.summary}
+
                     </p>
 
                     <p>
@@ -348,7 +395,6 @@ function renderArticles(){
 function setupSearch(){
 
     const searchBox =
-
         document.getElementById(
             "search"
         );
