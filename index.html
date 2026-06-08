@@ -11,22 +11,61 @@
 <body>
 
 <header>
+
     <div class="topbar">
+
         <h1>Four Nations News</h1>
 
         <div class="actions">
-            <input id="search" placeholder="Search articles...">
+
+            <input
+                id="search"
+                placeholder="Search articles...">
+
         </div>
+
     </div>
 
     <nav>
-        <a href="#">ATLA</a>
-        <a href="#">LOK</a>
-        <a href="#">Seven Havens</a>
-        <a href="#">Books / Comics</a>
-        <a href="#">Other</a>
-        <a href="login.html">Admin</a>
+
+        <a href="#" data-category="ALL">
+            Home
+        </a>
+
+        <a href="#" data-category="ATLA">
+            ATLA
+        </a>
+
+        <a href="#" data-category="LOK">
+            LOK
+        </a>
+
+        <a href="#" data-category="Seven Havens">
+            Seven Havens
+        </a>
+
+        <a href="#" data-category="Books / Comics">
+            Books / Comics
+        </a>
+
+        <a href="#" data-category="Other">
+            Other
+        </a>
+
+        <a href="about.html">
+            About Team
+        </a>
+
+        <a href="apply.html">
+            Apply
+        </a>
+
+        <a href="login.html">
+            Admin
+        </a>
+
     </nav>
+
 </header>
 
 <section
@@ -64,11 +103,12 @@
         <h2>Avatar Quote</h2>
 
         <blockquote>
-            "Life happens wherever you are,
-            whether you make it or not."
+            Loading quote...
         </blockquote>
 
-        <p>— Uncle Iroh</p>
+        <p>
+            Loading...
+        </p>
 
     </div>
 
@@ -76,13 +116,23 @@
 
         <h2>Character Spotlight</h2>
 
-        <h3>Zuko</h3>
+        <img
+            id="spotlightImage"
+            src="https://picsum.photos/300"
+            style="
+                width:100%;
+                height:220px;
+                object-fit:cover;
+                border-radius:8px;
+                margin-bottom:15px;
+            ">
+
+        <h3>
+            Loading...
+        </h3>
 
         <p>
-            Once banished from the Fire Nation,
-            Zuko's journey from outcast to Fire Lord
-            remains one of the most beloved stories
-            in Avatar history.
+            Loading...
         </p>
 
     </div>
@@ -92,23 +142,51 @@
 <section class="stats-bar">
 
     <div>
-        <span>61</span>
-        <p>Episodes</p>
+
+        <span id="articleCount">
+            0
+        </span>
+
+        <p>
+            Articles
+        </p>
+
     </div>
 
     <div>
-        <span>4</span>
-        <p>Nations</p>
+
+        <span>
+            4
+        </span>
+
+        <p>
+            Nations
+        </p>
+
     </div>
 
     <div>
-        <span>20+</span>
-        <p>Comics</p>
+
+        <span>
+            20+
+        </span>
+
+        <p>
+            Comics
+        </p>
+
     </div>
 
     <div>
-        <span>3</span>
-        <p>Animated Series</p>
+
+        <span>
+            3
+        </span>
+
+        <p>
+            Series
+        </p>
+
     </div>
 
 </section>
@@ -120,6 +198,7 @@
     <div
         id="articleGrid"
         class="article-grid">
+
     </div>
 
 </main>
@@ -130,14 +209,18 @@
 
     <ol id="trendingList">
 
-        <li>Loading...</li>
+        <li>
+            Loading...
+        </li>
 
     </ol>
 
 </section>
 
 <footer>
+
     © 2026 Four Nations News
+
 </footer>
 
 <script type="module" src="js/articles.js"></script>
