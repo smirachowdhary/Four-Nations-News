@@ -9,64 +9,83 @@ import {
 from "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
 
 let allArticles = [];
-let currentCategory = "ALL";
+
+const params =
+    new URLSearchParams(
+        window.location.search
+    );
+
+const pageCategory =
+    params.get("category");
 
 async function loadSiteSettings(){
 
-    const siteRef =
-        doc(db, "settings", "site");
+    try{
 
-    const siteSnap =
-        await getDoc(siteRef);
+        const siteRef =
+            doc(db,"settings","site");
 
-    if(!siteSnap.exists()){
-        return;
-    }
+        const siteSnap =
+            await getDoc(siteRef);
 
-    const settings =
-        siteSnap.data();
+        if(!siteSnap.exists()) return;
 
-    const quoteBox =
-        document.querySelector(".quote-card blockquote");
+        const settings =
+            siteSnap.data();
 
-    const quoteAuthor =
-        document.querySelector(".quote-card p");
+        const quoteBox =
+            document.querySelector(
+                ".quote-card blockquote"
+            );
 
-    const spotlightTitle =
-        document.querySelector(".spotlight-card h3");
+        const quoteAuthor =
+            document.querySelector(
+                ".quote-card p"
+            );
 
-    const spotlightText =
-        document.querySelector(".spotlight-card p");
+        const spotlightTitle =
+            document.querySelector(
+                ".spotlight-card h3"
+            );
 
-    const spotlightImage =
-        document.getElementById("spotlightImage");
+        const spotlightText =
+            document.querySelector(
+                ".spotlight-card p"
+            );
 
-    if(quoteBox){
-        quoteBox.textContent =
-            `"${settings.quoteText || ""}"`;
-    }
+        const spotlightImage =
+            document.getElementById(
+                "spotlightImage"
+            );
 
-    if(quoteAuthor){
-        quoteAuthor.textContent =
-            `— ${settings.quoteAuthor || ""}`;
-    }
+        if(quoteBox)
+            quoteBox.textContent =
+            `"${settings.quoteText}"`;
 
-    if(spotlightTitle){
-        spotlightTitle.textContent =
-            settings.spotlightName || "";
-    }
+        if(quoteAuthor)
+            quoteAuthor.textContent =
+            `— ${settings.quoteAuthor}`;
 
-    if(spotlightText){
-        spotlightText.textContent =
-            settings.spotlightDescription || "";
-    }
+        if(spotlightTitle)
+            spotlightTitle.textContent =
+            settings.spotlightName;
 
-    if(
-        spotlightImage &&
-        settings.spotlightImage
-    ){
-        spotlightImage.src =
+        if(spotlightText)
+            spotlightText.textContent =
+            settings.spotlightDescription;
+
+        if(
+            spotlightImage &&
+            settings.spotlightImage
+        ){
+            spotlightImage.src =
             settings.spotlightImage;
+        }
+
+    }catch(error){
+
+        console.log(error);
+
     }
 
 }
@@ -75,29 +94,41 @@ async function loadArticles(){
 
     const snapshot =
         await getDocs(
-            collection(db, "articles")
+            collection(db,"articles")
         );
 
     allArticles = [];
 
-    snapshot.forEach((doc) => {
+    snapshot.forEach((docSnap)=>{
 
         allArticles.push({
-            id: doc.id,
-            ...doc.data()
+
+            id:docSnap.id,
+
+            ...docSnap.data()
+
         });
 
     });
 
     allArticles.sort(
-        (a,b) =>
-            (b.createdAt || 0) -
-            (a.createdAt || 0)
+
+        (a,b)=>
+
+        (b.createdAt || 0)
+
+        -
+
+        (a.createdAt || 0)
+
     );
 
     setupHero();
+
     setupTrending();
+
     updateStats();
+
     renderArticles();
 
 }
@@ -105,39 +136,46 @@ async function loadArticles(){
 function setupHero(){
 
     const featured =
+
         allArticles.find(
-            article => article.featured
+
+            article =>
+
+            article.featured
+
         );
 
-    if(!featured){
-        return;
-    }
+    if(!featured) return;
 
     const heroTitle =
-        document.getElementById("heroTitle");
+        document.getElementById(
+            "heroTitle"
+        );
 
     const heroSummary =
-        document.getElementById("heroSummary");
+        document.getElementById(
+            "heroSummary"
+        );
 
     const heroImage =
-        document.getElementById("heroImage");
+        document.getElementById(
+            "heroImage"
+        );
 
-    if(heroTitle){
+    if(heroTitle)
         heroTitle.textContent =
-            featured.title;
-    }
+        featured.title;
 
-    if(heroSummary){
+    if(heroSummary)
         heroSummary.textContent =
-            featured.summary;
-    }
+        featured.summary;
 
     if(
         heroImage &&
         featured.featuredImage
     ){
         heroImage.src =
-            featured.featuredImage;
+        featured.featuredImage;
     }
 
 }
@@ -145,38 +183,48 @@ function setupHero(){
 function setupTrending(){
 
     const trendingList =
+
         document.getElementById(
             "trendingList"
         );
 
-    if(!trendingList){
-        return;
-    }
+    if(!trendingList) return;
 
     trendingList.innerHTML = "";
 
     allArticles
-        .slice(0,5)
-        .forEach(article => {
 
-            trendingList.innerHTML += `
-                <li>${article.title}</li>
-            `;
+    .slice(0,5)
 
-        });
+    .forEach(article=>{
+
+        trendingList.innerHTML += `
+
+            <li>
+
+                ${article.title}
+
+            </li>
+
+        `;
+
+    });
 
 }
 
 function updateStats(){
 
     const articleCount =
+
         document.getElementById(
             "articleCount"
         );
 
     if(articleCount){
+
         articleCount.textContent =
-            allArticles.length;
+        allArticles.length;
+
     }
 
 }
@@ -184,88 +232,112 @@ function updateStats(){
 function renderArticles(){
 
     const articleGrid =
+
         document.getElementById(
             "articleGrid"
         );
 
-    if(!articleGrid){
-        return;
-    }
+    if(!articleGrid) return;
 
     articleGrid.innerHTML = "";
 
-    let articles =
-        [...allArticles];
+    let articles = [...allArticles];
 
-    const search =
-        document
-        .getElementById("search")
-        ?.value
-        ?.toLowerCase() || "";
-
-    if(currentCategory !== "ALL"){
+    if(pageCategory){
 
         articles =
-            articles.filter(
-                article =>
-                    article.category ===
-                    currentCategory
-            );
+
+        articles.filter(
+
+            article =>
+
+            article.category ===
+
+            pageCategory
+
+        );
 
     }
+
+    const search =
+
+        document
+
+        .getElementById("search")
+
+        ?.value
+
+        ?.toLowerCase()
+
+        || "";
 
     if(search){
 
         articles =
-            articles.filter(article =>
 
-                article.title
-                ?.toLowerCase()
-                .includes(search)
+        articles.filter(article =>
 
-                ||
+            article.title
+            ?.toLowerCase()
+            .includes(search)
 
-                article.summary
-                ?.toLowerCase()
-                .includes(search)
+            ||
 
-                ||
+            article.summary
+            ?.toLowerCase()
+            .includes(search)
 
-                article.content
-                ?.toLowerCase()
-                .includes(search)
-
-            );
+        );
 
     }
 
-    articles.forEach(article => {
+    articles
+
+    .slice(0,4)
+
+    .forEach(article=>{
 
         articleGrid.innerHTML += `
 
-        <div class="card">
+        <a
+            href="article.html?id=${article.id}"
+            class="article-link"
+        >
 
-            <img
-                src="${
-                    article.featuredImage ||
-                    'https://picsum.photos/500'
-                }">
+            <div class="card">
 
-            <div class="card-content">
+                <img
+                    src="${
+                        article.featuredImage ||
+                        'https://picsum.photos/500'
+                    }"
+                >
 
-                <h3>${article.title}</h3>
+                <div class="card-content">
 
-                <p>${article.summary}</p>
+                    <h3>
+                        ${article.title}
+                    </h3>
 
-                <p>
-                    <strong>
-                        ${article.author}
-                    </strong>
-                </p>
+                    <p>
+                        ${article.summary}
+                    </p>
+
+                    <p>
+
+                        <strong>
+
+                            ${article.author}
+
+                        </strong>
+
+                    </p>
+
+                </div>
 
             </div>
 
-        </div>
+        </a>
 
         `;
 
@@ -276,50 +348,25 @@ function renderArticles(){
 function setupSearch(){
 
     const searchBox =
+
         document.getElementById(
             "search"
         );
 
-    if(!searchBox){
-        return;
-    }
+    if(!searchBox) return;
 
     searchBox.addEventListener(
+
         "input",
+
         renderArticles
+
     );
 
 }
 
-function setupCategories(){
-
-    document
-    .querySelectorAll(
-        "nav a[data-category]"
-    )
-    .forEach(link => {
-
-        link.addEventListener(
-            "click",
-            (e) => {
-
-                e.preventDefault();
-
-                currentCategory =
-                    link.dataset.category;
-
-                renderArticles();
-
-            }
-        );
-
-    });
-
-}
-
 loadSiteSettings();
-loadArticles();
-setupSearch();
-setupCategories();
 
-console.log("ARTICLES JS LOADED");
+loadArticles();
+
+setupSearch();
