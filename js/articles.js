@@ -9,49 +9,35 @@ import {
 from "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
 
 let allArticles = [];
-
 let currentCategory = "ALL";
 
 async function loadSiteSettings(){
 
     const siteRef =
-        doc(
-            db,
-            "settings",
-            "site"
-        );
+        doc(db, "settings", "site");
 
     const siteSnap =
-        await getDoc(
-            siteRef
-        );
+        await getDoc(siteRef);
 
-    if(!siteSnap.exists()){
-        return;
-    }
+    if(!siteSnap.exists()) return;
 
     const settings =
         siteSnap.data();
 
     const quoteBox =
-        document.querySelector(
-            ".quote-card blockquote"
-        );
+        document.querySelector(".quote-card blockquote");
 
     const quoteAuthor =
-        document.querySelector(
-            ".quote-card p"
-        );
+        document.querySelector(".quote-card p");
 
     const spotlightTitle =
-        document.querySelector(
-            ".spotlight-card h3"
-        );
+        document.querySelector(".spotlight-card h3");
 
     const spotlightText =
-        document.querySelector(
-            ".spotlight-card p"
-        );
+        document.querySelector(".spotlight-card p");
+
+    const spotlightImage =
+        document.getElementById("spotlightImage");
 
     if(quoteBox){
         quoteBox.textContent =
@@ -73,6 +59,14 @@ async function loadSiteSettings(){
             settings.spotlightDescription || "";
     }
 
+    if(
+        spotlightImage &&
+        settings.spotlightImage
+    ){
+        spotlightImage.src =
+            settings.spotlightImage;
+    }
+
 }
 
 async function loadArticles(){
@@ -87,18 +81,22 @@ async function loadArticles(){
     snapshot.forEach((doc) => {
 
         allArticles.push({
-            id:doc.id,
+            id: doc.id,
             ...doc.data()
         });
 
     });
 
+    allArticles.sort(
+        (a,b) =>
+            (b.createdAt || 0) -
+            (a.createdAt || 0)
+    );
+
     setupHero();
-
     setupBreaking();
-
     setupTrending();
-
+    updateStats();
     renderArticles();
 
 }
@@ -107,13 +105,10 @@ function setupHero(){
 
     const featured =
         allArticles.find(
-            article =>
-                article.featured
+            article => article.featured
         );
 
-    if(!featured){
-        return;
-    }
+    if(!featured) return;
 
     document.getElementById(
         "heroTitle"
@@ -140,13 +135,10 @@ function setupBreaking(){
 
     const breaking =
         allArticles.find(
-            article =>
-                article.breaking
+            article => article.breaking
         );
 
-    if(!breaking){
-        return;
-    }
+    if(!breaking) return;
 
     document.getElementById(
         "breakingBanner"
@@ -163,6 +155,8 @@ function setupTrending(){
             "trendingList"
         );
 
+    if(!trendingList) return;
+
     trendingList.innerHTML = "";
 
     allArticles
@@ -170,12 +164,26 @@ function setupTrending(){
         .forEach(article => {
 
             trendingList.innerHTML += `
-                <li>
-                    ${article.title}
-                </li>
+                <li>${article.title}</li>
             `;
 
         });
+
+}
+
+function updateStats(){
+
+    const articleCount =
+        document.getElementById(
+            "articleCount"
+        );
+
+    if(articleCount){
+
+        articleCount.textContent =
+            allArticles.length;
+
+    }
 
 }
 
@@ -185,6 +193,8 @@ function renderArticles(){
         document.getElementById(
             "articleGrid"
         );
+
+    if(!articleGrid) return;
 
     articleGrid.innerHTML = "";
 
@@ -249,25 +259,19 @@ function renderArticles(){
                 <img
                     src="${
                         article.featuredImage ||
-                        'https://picsum.photos/500'
+                        "https://picsum.photos/500"
                     }">
 
                 <div class="card-content">
 
-                    <h3>
-                        ${article.title}
-                    </h3>
+                    <h3>${article.title}</h3>
+
+                    <p>${article.summary}</p>
 
                     <p>
-                        ${article.summary}
-                    </p>
-
-                    <p>
-
                         <strong>
                             ${article.author}
                         </strong>
-
                     </p>
 
                 </div>
@@ -289,9 +293,7 @@ function setupSearch(){
             "search"
         );
 
-    if(!searchBox){
-        return;
-    }
+    if(!searchBox) return;
 
     searchBox.addEventListener(
         "input",
@@ -302,40 +304,20 @@ function setupSearch(){
 
 function setupCategories(){
 
-    const navLinks =
-        document.querySelectorAll(
-            "nav a"
-        );
-
-    navLinks.forEach(link => {
+    document
+    .querySelectorAll(
+        "nav a[data-category]"
+    )
+    .forEach(link => {
 
         link.addEventListener(
             "click",
             (e) => {
 
-                const text =
-                    link.textContent
-                    .trim();
-
-                if(
-                    text === "Admin"
-                ){
-                    return;
-                }
-
                 e.preventDefault();
 
-                if(
-                    text === "Four Nations"
-                ){
-                    currentCategory =
-                        "ALL";
-                }else{
-
-                    currentCategory =
-                        text;
-
-                }
+                currentCategory =
+                    link.dataset.category;
 
                 renderArticles();
 
