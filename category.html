@@ -10,7 +10,7 @@
     content="width=device-width, initial-scale=1.0"
 >
 
-<title>Category</title>
+<title>Four Nations News</title>
 
 <link
     rel="stylesheet"
@@ -48,29 +48,23 @@
 
     <nav>
 
-        <a href="index.html">
-            Home
-        </a>
+        <a href="index.html">Home</a>
 
-        <a href="category.html?category=ATLA">
-            ATLA
-        </a>
+        <a href="category.html?category=ATLA">ATLA</a>
 
-        <a href="category.html?category=LOK">
-            LOK
-        </a>
+        <a href="category.html?category=LOK">LOK</a>
 
-        <a href="category.html?category=Seven Havens">
-            Seven Havens
-        </a>
+        <a href="category.html?category=Seven Havens">Seven Havens</a>
 
-        <a href="category.html?category=Books/Comics">
-            Books / Comics
-        </a>
+        <a href="category.html?category=Books/Comics">Books / Comics</a>
 
-        <a href="category.html?category=Other">
-            Other
-        </a>
+        <a href="category.html?category=Other">Other</a>
+
+        <a href="about.html">About Team</a>
+
+        <a href="apply.html">Apply</a>
+
+        <a href="admin.html">Admin</a>
 
     </nav>
 
@@ -78,11 +72,39 @@
 
 <main>
 
-    <h2 id="categoryTitle">
+    <section
+        class="category-hero"
+        style="
+            background:white;
+            padding:40px;
+            border-radius:12px;
+            margin-bottom:30px;
+            box-shadow:0 2px 10px rgba(0,0,0,.08);
+        "
+    >
 
-        Category
+        <h2
+            id="categoryTitle"
+            style="
+                font-size:3rem;
+                margin-bottom:15px;
+            "
+        >
+            Category
+        </h2>
 
-    </h2>
+        <p
+            id="categoryDescription"
+            style="
+                font-size:1.1rem;
+                color:#555;
+                max-width:900px;
+            "
+        >
+            Loading...
+        </p>
+
+    </section>
 
     <div
         id="articleGrid"
@@ -112,12 +134,41 @@ const params =
 const category =
     params.get("category");
 
+const descriptions = {
+
+    "ATLA":
+    "Avatar: The Last Airbender coverage including characters, lore, bending, nations, episodes, theories, and major events from the original series.",
+
+    "LOK":
+    "The Legend of Korra news, character analysis, spirit world discussions, Republic City stories, and franchise developments.",
+
+    "Seven Havens":
+    "Coverage of Avatar: Seven Havens including new characters, plot theories, worldbuilding, announcements, and future developments.",
+
+    "Books/Comics":
+    "Avatar novels, graphic novels, comics, publishing news, reviews, and reading guides across the Avatar universe.",
+
+    "Other":
+    "Everything else from fan creations and interviews to community events, merchandise, games, and franchise updates."
+
+};
+
 if(category){
 
     document.getElementById(
         "categoryTitle"
     ).textContent =
         category;
+
+    document.getElementById(
+        "categoryDescription"
+    ).textContent =
+        descriptions[category]
+        || "Avatar universe news and articles.";
+
+    document.title =
+        category +
+        " | Four Nations News";
 
 }
 
