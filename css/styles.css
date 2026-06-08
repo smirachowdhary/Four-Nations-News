@@ -395,3 +395,37 @@ footer{
         font-size:2rem;
     }
 }
+
+.search-result{
+
+    display:flex;
+
+    gap:15px;
+
+    align-items:center;
+
+    padding:15px;
+
+    border-bottom:
+    1px solid #eee;
+
+    text-decoration:none;
+
+    color:black;
+}
+
+.search-result img{
+
+    width:80px;
+
+    height:80px;
+
+    object-fit:cover;
+
+    border-radius:10px;
+}
+
+.search-result:hover{
+
+    background:#f4f4f4;
+}
