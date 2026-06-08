@@ -321,3 +321,5 @@ loadSiteSettings();
 loadArticles();
 setupSearch();
 setupCategories();
+
+console.log("ARTICLES JS LOADED");
