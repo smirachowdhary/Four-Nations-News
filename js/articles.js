@@ -2,129 +2,279 @@ import { db } from "./firebase.js";
 
 import {
     collection,
-    getDocs
+    getDocs,
+    doc,
+    getDoc
 }
 from "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
 
-async function loadArticles() {
+let allArticles = [];
 
-    const articleGrid =
-        document.getElementById("articleGrid");
+let currentCategory = "ALL";
 
-    const trendingList =
-        document.getElementById("trendingList");
+async function loadSiteSettings(){
 
-    const heroImage =
-        document.getElementById("heroImage");
+    const siteRef =
+        doc(
+            db,
+            "settings",
+            "site"
+        );
 
-    const heroTitle =
-        document.getElementById("heroTitle");
+    const siteSnap =
+        await getDoc(
+            siteRef
+        );
 
-    const heroSummary =
-        document.getElementById("heroSummary");
+    if(!siteSnap.exists()){
+        return;
+    }
 
-    const breakingBanner =
-        document.getElementById("breakingBanner");
+    const settings =
+        siteSnap.data();
 
-    articleGrid.innerHTML = "";
-    trendingList.innerHTML = "";
+    const quoteBox =
+        document.querySelector(
+            ".quote-card blockquote"
+        );
+
+    const quoteAuthor =
+        document.querySelector(
+            ".quote-card p"
+        );
+
+    const spotlightTitle =
+        document.querySelector(
+            ".spotlight-card h3"
+        );
+
+    const spotlightText =
+        document.querySelector(
+            ".spotlight-card p"
+        );
+
+    if(quoteBox){
+        quoteBox.textContent =
+            `"${settings.quoteText || ""}"`;
+    }
+
+    if(quoteAuthor){
+        quoteAuthor.textContent =
+            `— ${settings.quoteAuthor || ""}`;
+    }
+
+    if(spotlightTitle){
+        spotlightTitle.textContent =
+            settings.spotlightName || "";
+    }
+
+    if(spotlightText){
+        spotlightText.textContent =
+            settings.spotlightDescription || "";
+    }
+
+}
+
+async function loadArticles(){
 
     const snapshot =
         await getDocs(
             collection(db, "articles")
         );
 
-    const articles = [];
+    allArticles = [];
 
     snapshot.forEach((doc) => {
 
-        articles.push({
-            id: doc.id,
+        allArticles.push({
+            id:doc.id,
             ...doc.data()
         });
 
     });
 
-    const featuredArticle =
-        articles.find(
-            article => article.featured
+    setupHero();
+
+    setupBreaking();
+
+    setupTrending();
+
+    renderArticles();
+
+}
+
+function setupHero(){
+
+    const featured =
+        allArticles.find(
+            article =>
+                article.featured
         );
 
-    if(featuredArticle){
+    if(!featured){
+        return;
+    }
 
-        heroTitle.textContent =
-            featuredArticle.title;
+    document.getElementById(
+        "heroTitle"
+    ).textContent =
+        featured.title;
 
-        heroSummary.textContent =
-            featuredArticle.summary;
+    document.getElementById(
+        "heroSummary"
+    ).textContent =
+        featured.summary;
 
-        heroImage.src =
-            featuredArticle.featuredImage;
+    if(featured.featuredImage){
+
+        document.getElementById(
+            "heroImage"
+        ).src =
+            featured.featuredImage;
 
     }
 
-    const breakingArticle =
-        articles.find(
-            article => article.breaking
+}
+
+function setupBreaking(){
+
+    const breaking =
+        allArticles.find(
+            article =>
+                article.breaking
         );
 
-    if(breakingArticle){
+    if(!breaking){
+        return;
+    }
 
-        breakingBanner.textContent =
-            "BREAKING NEWS: " +
-            breakingArticle.title;
+    document.getElementById(
+        "breakingBanner"
+    ).textContent =
+        "BREAKING NEWS: " +
+        breaking.title;
+
+}
+
+function setupTrending(){
+
+    const trendingList =
+        document.getElementById(
+            "trendingList"
+        );
+
+    trendingList.innerHTML = "";
+
+    allArticles
+        .slice(0,5)
+        .forEach(article => {
+
+            trendingList.innerHTML += `
+                <li>
+                    ${article.title}
+                </li>
+            `;
+
+        });
+
+}
+
+function renderArticles(){
+
+    const articleGrid =
+        document.getElementById(
+            "articleGrid"
+        );
+
+    articleGrid.innerHTML = "";
+
+    let articles =
+        [...allArticles];
+
+    const search =
+        document
+        .getElementById("search")
+        ?.value
+        ?.toLowerCase() || "";
+
+    if(currentCategory !== "ALL"){
+
+        articles =
+            articles.filter(
+                article =>
+                    article.category ===
+                    currentCategory
+            );
 
     }
 
-    articles
-    .slice(0,5)
-    .forEach(article => {
+    if(search){
 
-        trendingList.innerHTML += `
-            <li>${article.title}</li>
-        `;
+        articles =
+            articles.filter(article =>
 
-    });
+                article.title
+                ?.toLowerCase()
+                .includes(search)
+
+                ||
+
+                article.summary
+                ?.toLowerCase()
+                .includes(search)
+
+                ||
+
+                article.content
+                ?.toLowerCase()
+                .includes(search)
+
+            );
+
+    }
 
     articles.forEach(article => {
 
         articleGrid.innerHTML += `
 
-            <a
-                href="article.html?id=${article.id}"
-                style="
-                    text-decoration:none;
-                    color:inherit;
-                ">
+        <a
+            href="article.html?id=${article.id}"
+            style="
+                text-decoration:none;
+                color:inherit;
+            ">
 
-                <div class="card">
+            <div class="card">
 
-                    <img
-                        src="${article.featuredImage}">
+                <img
+                    src="${
+                        article.featuredImage ||
+                        'https://picsum.photos/500'
+                    }">
 
-                    <div class="card-content">
+                <div class="card-content">
 
-                        <h3>
-                            ${article.title}
-                        </h3>
+                    <h3>
+                        ${article.title}
+                    </h3>
 
-                        <p>
-                            ${article.summary}
-                        </p>
+                    <p>
+                        ${article.summary}
+                    </p>
 
-                        <p>
+                    <p>
 
-                            <strong>
-                                ${article.author}
-                            </strong>
+                        <strong>
+                            ${article.author}
+                        </strong>
 
-                        </p>
-
-                    </div>
+                    </p>
 
                 </div>
 
-            </a>
+            </div>
+
+        </a>
 
         `;
 
@@ -132,4 +282,71 @@ async function loadArticles() {
 
 }
 
+function setupSearch(){
+
+    const searchBox =
+        document.getElementById(
+            "search"
+        );
+
+    if(!searchBox){
+        return;
+    }
+
+    searchBox.addEventListener(
+        "input",
+        renderArticles
+    );
+
+}
+
+function setupCategories(){
+
+    const navLinks =
+        document.querySelectorAll(
+            "nav a"
+        );
+
+    navLinks.forEach(link => {
+
+        link.addEventListener(
+            "click",
+            (e) => {
+
+                const text =
+                    link.textContent
+                    .trim();
+
+                if(
+                    text === "Admin"
+                ){
+                    return;
+                }
+
+                e.preventDefault();
+
+                if(
+                    text === "Four Nations"
+                ){
+                    currentCategory =
+                        "ALL";
+                }else{
+
+                    currentCategory =
+                        text;
+
+                }
+
+                renderArticles();
+
+            }
+        );
+
+    });
+
+}
+
+loadSiteSettings();
 loadArticles();
+setupSearch();
+setupCategories();
