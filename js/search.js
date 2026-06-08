@@ -6,25 +6,8 @@ import {
 }
 from "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
 
-const searchInput =
-    document.getElementById(
-        "search"
-    );
-
-const searchModal =
-    document.getElementById(
-        "searchModal"
-    );
-
-const searchResults =
-    document.getElementById(
-        "searchResults"
-    );
-
-const closeSearch =
-    document.getElementById(
-        "closeSearch"
-    );
+const searchBox =
+    document.getElementById("search");
 
 let articles = [];
 
@@ -38,112 +21,41 @@ async function loadArticles(){
             )
         );
 
-    snapshot.forEach(
-        articleDoc => {
+    articles = [];
 
-            articles.push({
+    snapshot.forEach(doc=>{
 
-                id:articleDoc.id,
+        articles.push({
 
-                ...articleDoc.data()
+            id:doc.id,
 
-            });
+            ...doc.data()
 
-        }
-    );
+        });
+
+    });
 
 }
 
 loadArticles();
 
-searchInput.addEventListener(
-    "focus",
-    () => {
+searchBox?.addEventListener(
+    "keydown",
+    (e)=>{
 
-        searchModal.style.display =
-            "flex";
-
-    }
-);
-
-closeSearch.addEventListener(
-    "click",
-    () => {
-
-        searchModal.style.display =
-            "none";
-
-        searchInput.value = "";
-
-        searchResults.innerHTML = "";
-
-    }
-);
-
-searchInput.addEventListener(
-    "input",
-    () => {
-
-        const value =
-            searchInput.value
-            .toLowerCase();
-
-        searchResults.innerHTML = "";
-
-        if(!value){
+        if(e.key !== "Enter"){
             return;
         }
 
-        const matches =
-            articles.filter(article =>
+        const query =
+            searchBox.value.trim();
 
-                article.title
-                ?.toLowerCase()
-                .includes(value)
+        if(!query){
+            return;
+        }
 
-                ||
-
-                article.summary
-                ?.toLowerCase()
-                .includes(value)
-
-            );
-
-        matches.slice(0,10)
-        .forEach(article => {
-
-            searchResults.innerHTML += `
-
-            <a
-                href="article.html?id=${article.id}"
-                class="search-result"
-            >
-
-                <img
-                    src="${
-                        article.featuredImage
-                        ||
-                        "https://picsum.photos/200"
-                    }"
-                >
-
-                <div>
-
-                    <h3>
-                        ${article.title}
-                    </h3>
-
-                    <p>
-                        ${article.category}
-                    </p>
-
-                </div>
-
-            </a>
-
-            `;
-
-        });
+        window.location.href =
+            `search.html?q=${encodeURIComponent(query)}`;
 
     }
 );
