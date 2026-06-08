@@ -1,144 +1,115 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>About Four Nations News</title>
 
-<style>
+<meta
+    name="viewport"
+    content="width=device-width,initial-scale=1"
+>
 
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-}
-  
-body{
-    font-family:Arial, Helvetica, sans-serif;
-    background:#f4f4f4;
-}
+<title>About Team</title>
 
-header{
-    background:#14274e;
-    color:white;
-    padding:25px;
-}
+<link
+    rel="stylesheet"
+    href="css/styles.css"
+>
 
-header a{
-    color:white;
-    text-decoration:none;
-    font-weight:bold;
-}
-
-.container{
-    max-width:1000px;
-    margin:40px auto;
-    padding:0 20px;
-}
-
-.card{
-    background:white;
-    padding:30px;
-    border-radius:12px;
-    box-shadow:0 2px 8px rgba(0,0,0,.08);
-    margin-bottom:25px;
-}
-
-h1{
-    margin-bottom:20px;
-}
-
-h2{
-    margin-bottom:15px;
-}
-
-p{
-    line-height:1.8;
-}
-
-.team-grid{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-    gap:20px;
-}
-
-.member{
-    background:white;
-    padding:20px;
-    border-radius:12px;
-    box-shadow:0 2px 8px rgba(0,0,0,.08);
-}
-
-.member img{
-    width:100%;
-    height:220px;
-    object-fit:cover;
-    border-radius:8px;
-    margin-bottom:10px;
-}
-
-</style>
 </head>
 
 <body>
 
 <header>
 
-    <a href="index.html">
-        ← Back to Home
-    </a>
+    <div class="topbar">
+
+        <h1>
+
+            <a
+                href="index.html"
+                style="
+                    text-decoration:none;
+                    color:black;
+                "
+            >
+                Four Nations News
+            </a>
+
+        </h1>
+
+    </div>
+
+    <nav>
+
+        <a href="index.html">Home</a>
+
+        <a href="category.html?category=ATLA">ATLA</a>
+
+        <a href="category.html?category=LOK">LOK</a>
+
+        <a href="category.html?category=Seven Havens">Seven Havens</a>
+
+        <a href="category.html?category=Books/Comics">Books / Comics</a>
+
+        <a href="category.html?category=Other">Other</a>
+
+        <a href="about.html">About Team</a>
+
+        <a href="apply.html">Apply</a>
+
+        <a href="login.html">Admin</a>
+
+    </nav>
 
 </header>
 
-<div class="container">
+<main>
 
-    <div class="card">
+    <h2>
+        About Four Nations News
+    </h2>
 
-        <h1>About Four Nations News</h1>
+    <p
+        style="
+            margin-bottom:40px;
+        "
+    >
 
-        <p>
+        Four Nations News is a fan-powered
+        publication covering Avatar:
+        The Last Airbender, The Legend
+        of Korra, Seven Havens, books,
+        comics, and the wider Avatar
+        universe.
 
-            Four Nations News is a fan-powered news website
-            dedicated to covering Avatar: The Last Airbender,
-            The Legend of Korra, Seven Havens, comics,
-            books, games, and everything happening
-            across the Avatar universe.
+    </p>
 
-        </p>
+    <h2>
+        Meet The Team
+    </h2>
 
-    </div>
+    <div
+        id="teamGrid"
+        class="article-grid"
+    >
 
-    <h2>Our Team</h2>
-
-    <div class="team-grid">
-
-        <div class="member">
-
-            <img src="https://picsum.photos/400/300">
-
-            <h3>Founder</h3>
-
-            <p>
-                Add your bio here.
-            </p>
-
-        </div>
-
-        <div class="member">
-
-            <img src="https://picsum.photos/401/300">
-
-            <h3>Writer</h3>
-
-            <p>
-                Add your bio here.
-            </p>
-
-        </div>
+        Loading Team...
 
     </div>
 
-</div>
+</main>
+
+<footer>
+
+    © 2026 Four Nations News
+
+</footer>
+
+<script
+    type="module"
+    src="js/team.js"
+></script>
 
 </body>
 </html>
