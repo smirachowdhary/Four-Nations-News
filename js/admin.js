@@ -80,8 +80,6 @@ function getFormData(){
         featured:
             document.getElementById("featured").checked,
 
-        breaking:
-            document.getElementById("breaking").checked,
 
         featuredImage:
             document.getElementById("image1").value,
@@ -109,9 +107,6 @@ document
         await clearFeatured();
     }
 
-    if(data.breaking){
-        await clearBreaking();
-    }
 
     await addDoc(
         collection(db, "articles"),
@@ -244,11 +239,6 @@ async function loadArticles(){
                 ${article.featured ? "Yes" : "No"}
             </p>
 
-            <p>
-                Breaking:
-                ${article.breaking ? "Yes" : "No"}
-            </p>
-
             <div class="actions">
 
                 <button
@@ -346,9 +336,6 @@ async function loadArticles(){
 
                 document.getElementById("featured").checked =
                     article.featured || false;
-
-                document.getElementById("breaking").checked =
-                    article.breaking || false;
 
                 document.getElementById("image1").value =
                     article.images?.[0] || "";
