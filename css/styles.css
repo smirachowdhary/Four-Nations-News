@@ -9,15 +9,15 @@ html{
 }
 
 body{
-    font-family:Arial, Helvetica, sans-serif;
+    font-family:Arial,Helvetica,sans-serif;
     background:#f4f4f4;
     color:#111;
     line-height:1.6;
 }
 
-/* =========================
-   HEADER
-========================= */
+/* =====================
+HEADER
+===================== */
 
 header{
     background:white;
@@ -33,7 +33,7 @@ header{
 
     margin:auto;
 
-    padding:20px 40px;
+    padding:18px 40px;
 
     display:flex;
 
@@ -44,13 +44,9 @@ header{
 
 h1{
 
-    font-size:3rem;
+    font-size:2.2rem;
 
     font-weight:900;
-
-    letter-spacing:-1px;
-
-    white-space:nowrap;
 }
 
 .actions{
@@ -64,7 +60,7 @@ h1{
 
     width:420px;
 
-    padding:12px 14px;
+    padding:12px;
 
     border:1px solid #ccc;
 
@@ -73,9 +69,9 @@ h1{
     font-size:1rem;
 }
 
-/* =========================
-   NAVIGATION
-========================= */
+/* =====================
+NAV
+===================== */
 
 nav{
 
@@ -85,13 +81,11 @@ nav{
 
     justify-content:center;
 
-    align-items:center;
-
     flex-wrap:wrap;
 
-    gap:24px;
+    gap:22px;
 
-    padding:16px;
+    padding:14px;
 }
 
 nav a{
@@ -101,8 +95,6 @@ nav a{
     text-decoration:none;
 
     font-weight:700;
-
-    transition:.2s;
 }
 
 nav a:hover{
@@ -110,22 +102,20 @@ nav a:hover{
     opacity:.8;
 }
 
-/* =========================
-   HERO
-========================= */
+/* =====================
+HERO
+===================== */
 
 .hero{
 
     position:relative;
-
-    width:100%;
 }
 
 .hero img{
 
     width:100%;
 
-    height:500px;
+    height:430px;
 
     object-fit:cover;
 }
@@ -134,17 +124,17 @@ nav a:hover{
 
     position:absolute;
 
-    left:35px;
+    left:25px;
 
-    bottom:35px;
+    bottom:25px;
 
-    background:rgba(0,0,0,.85);
+    width:260px;
+
+    background:rgba(0,0,0,.88);
 
     color:white;
 
-    width:450px;
-
-    padding:22px;
+    padding:18px;
 
     border-radius:12px;
 }
@@ -155,13 +145,11 @@ nav a:hover{
 
     background:#d90429;
 
-    color:white;
-
-    padding:6px 10px;
+    padding:5px 10px;
 
     border-radius:6px;
 
-    font-size:.8rem;
+    font-size:.75rem;
 
     font-weight:700;
 
@@ -170,35 +158,51 @@ nav a:hover{
 
 .hero-text h2{
 
-    font-size:2rem;
+    font-size:1.1rem;
 
-    margin-bottom:10px;
-
-    line-height:1.2;
+    line-height:1.3;
 }
 
 .hero-text p{
 
-    font-size:1rem;
+    display:none;
 }
 
-/* =========================
-   QUOTE + SPOTLIGHT
-========================= */
+/* =====================
+MAIN WIDTHS
+===================== */
 
-.homepage-info{
+.homepage-info,
+.stats-bar,
+main,
+.newsletter{
+
+    width:100%;
 
     max-width:1200px;
 
-    margin:40px auto;
+    margin-left:auto;
 
-    padding:0 20px;
+    margin-right:auto;
+}
+
+/* =====================
+QUOTE + SPOTLIGHT
+===================== */
+
+.homepage-info{
 
     display:grid;
 
     grid-template-columns:1fr 1fr;
 
-    gap:20px;
+    gap:18px;
+
+    margin-top:30px;
+
+    margin-bottom:25px;
+
+    padding:0 20px;
 }
 
 .quote-card,
@@ -208,24 +212,28 @@ nav a:hover{
 
     border-radius:12px;
 
-    padding:25px;
+    padding:22px;
 
     box-shadow:0 2px 10px rgba(0,0,0,.08);
+
+    min-height:260px;
 }
 
 .quote-card h2,
 .spotlight-card h2{
 
-    margin-bottom:18px;
+    font-size:1.8rem;
+
+    margin-bottom:14px;
 }
 
 .quote-card blockquote{
 
-    font-size:1.3rem;
-
-    font-style:italic;
+    font-size:1.25rem;
 
     margin-bottom:12px;
+
+    font-style:italic;
 }
 
 .quote-card p{
@@ -237,29 +245,25 @@ nav a:hover{
 
     width:100%;
 
-    height:220px;
+    height:160px;
 
     object-fit:cover;
 
     border-radius:10px;
 
-    margin-bottom:15px;
+    margin-bottom:12px;
 }
 
 .spotlight-card h3{
 
-    margin-bottom:10px;
+    margin-bottom:8px;
 }
 
-/* =========================
-   STATS
-========================= */
+/* =====================
+STATS
+===================== */
 
 .stats-bar{
-
-    max-width:1200px;
-
-    margin:30px auto;
 
     background:#14274e;
 
@@ -267,29 +271,38 @@ nav a:hover{
 
     border-radius:12px;
 
-    padding:25px;
-
     display:grid;
 
     grid-template-columns:repeat(4,1fr);
 
     text-align:center;
+
+    padding:22px;
+
+    margin-bottom:35px;
 }
 
 .stats-bar span{
 
     display:block;
 
-    font-size:2.3rem;
+    font-size:2.2rem;
 
     font-weight:900;
 }
 
-/* =========================
-   MAIN
-========================= */
+.stats-bar p{
+
+    margin-top:5px;
+}
+
+/* =====================
+MAIN
+===================== */
 
 main{
+
+    width:100%;
 
     max-width:1200px;
 
@@ -300,19 +313,19 @@ main{
 
 .homepage-section{
 
-    margin-bottom:40px;
+    margin-bottom:35px;
 }
 
 main h2{
 
-    font-size:2rem;
+    font-size:2.3rem;
 
-    margin-bottom:20px;
+    margin-bottom:18px;
 }
 
-/* =========================
-   TRENDING
-========================= */
+/* =====================
+TRENDING
+===================== */
 
 .trending-list{
 
@@ -320,47 +333,64 @@ main h2{
 
     border-radius:12px;
 
-    padding:25px;
+    padding:22px;
 
     box-shadow:0 2px 10px rgba(0,0,0,.08);
 }
 
 .trending-ranking{
 
-    padding-left:25px;
+    list-style:none;
+
+    padding:0;
 }
 
 .trending-ranking li{
 
-    margin-bottom:18px;
+    background:#f8f8f8;
+
+    border-radius:10px;
+
+    padding:16px 18px;
+
+    margin-bottom:12px;
+
+    border-left:5px solid #14274e;
+}
+
+.trending-ranking li:last-child{
+
+    margin-bottom:0;
 }
 
 .trending-ranking a{
 
-    color:#111;
-
     text-decoration:none;
 
-    font-size:1.05rem;
+    color:#111;
+
+    font-size:1.1rem;
+
+    font-weight:700;
 }
 
 .trending-ranking a:hover{
 
-    text-decoration:underline;
+    color:#14274e;
 }
 
 .trend-meta{
 
-    margin-top:4px;
+    margin-top:6px;
 
     color:#666;
 
     font-size:.9rem;
 }
 
-/* =========================
-   LATEST NEWS
-========================= */
+/* =====================
+LATEST NEWS
+===================== */
 
 .article-grid{
 
@@ -369,7 +399,7 @@ main h2{
     grid-template-columns:
     repeat(4,1fr);
 
-    gap:20px;
+    gap:28px;
 }
 
 .article-link{
@@ -415,42 +445,44 @@ main h2{
 
 .card-content h3{
 
-    font-size:1.2rem;
+    font-size:1.25rem;
 
     margin-bottom:10px;
 }
 
 .card-content p{
 
-    margin-bottom:10px;
+    color:#444;
+
+    margin-bottom:8px;
 }
 
 .card-meta{
 
-    color:#666;
+    color:#777;
 
     font-size:.9rem;
 
     margin-top:10px;
 }
 
-/* =========================
-   NEWSLETTER
-========================= */
+/* =====================
+NEWSLETTER
+===================== */
 
 .newsletter{
-
-    max-width:1200px;
-
-    margin:50px auto;
-
-    padding:35px;
 
     background:white;
 
     border-radius:12px;
 
+    padding:35px;
+
     text-align:center;
+
+    margin-top:20px;
+
+    margin-bottom:40px;
 
     box-shadow:0 2px 10px rgba(0,0,0,.08);
 }
@@ -459,12 +491,12 @@ main h2{
 
     font-size:2rem;
 
-    margin-bottom:15px;
+    margin-bottom:12px;
 }
 
 .newsletter p{
 
-    color:#555;
+    color:#666;
 
     margin-bottom:20px;
 }
@@ -484,15 +516,11 @@ main h2{
 
     width:350px;
 
-    max-width:100%;
-
     padding:14px;
 
     border:1px solid #ccc;
 
     border-radius:8px;
-
-    font-size:1rem;
 }
 
 .newsletter-form button{
@@ -503,23 +531,18 @@ main h2{
 
     border:none;
 
-    border-radius:8px;
-
     padding:14px 22px;
+
+    border-radius:8px;
 
     cursor:pointer;
 
     font-weight:700;
 }
 
-.newsletter-form button:hover{
-
-    opacity:.9;
-}
-
-/* =========================
-   FOOTER
-========================= */
+/* =====================
+FOOTER
+===================== */
 
 footer{
 
@@ -527,7 +550,7 @@ footer{
 
     color:white;
 
-    margin-top:60px;
+    margin-top:50px;
 }
 
 .footer-content{
@@ -548,20 +571,15 @@ footer{
     margin-bottom:10px;
 }
 
-.footer-content p{
-
-    margin-bottom:12px;
-}
-
 .footer-links{
 
     display:flex;
 
     justify-content:center;
 
-    flex-wrap:wrap;
-
     gap:20px;
+
+    flex-wrap:wrap;
 
     margin:20px 0;
 }
@@ -575,83 +593,13 @@ footer{
     font-weight:700;
 }
 
-/* =========================
-   SEARCH PAGE
-========================= */
-
-.page-title{
-
-    text-align:center;
-
-    font-size:2.5rem;
-
-    margin-bottom:25px;
-}
-
-.search-result{
-
-    display:flex;
-
-    gap:15px;
-
-    align-items:center;
-
-    padding:15px;
-
-    background:white;
-
-    border-radius:12px;
-
-    margin-bottom:12px;
-
-    text-decoration:none;
-
-    color:black;
-
-    box-shadow:0 2px 10px rgba(0,0,0,.08);
-}
-
-.search-result:hover{
-
-    transform:translateY(-2px);
-}
-
-.search-result img{
-
-    width:90px;
-
-    height:90px;
-
-    object-fit:cover;
-
-    border-radius:10px;
-}
-
-/* =========================
-   CATEGORY PAGES
-========================= */
-
-.category-header{
-
-    max-width:1200px;
-
-    margin:40px auto 20px;
-
-    padding:0 20px;
-}
-
-.category-header h2{
-
-    font-size:2.5rem;
-}
-
-/* =========================
-   ARTICLE PAGE
-========================= */
+/* =====================
+ARTICLE PAGE
+===================== */
 
 .article-container{
 
-    max-width:1000px;
+    max-width:950px;
 
     margin:40px auto;
 
@@ -701,100 +649,120 @@ footer{
     font-size:1.05rem;
 }
 
-.article-actions{
-
-    display:flex;
-
-    gap:15px;
-
-    margin-top:25px;
-}
-
-.like-btn{
-
-    background:#14274e;
-
-    color:white;
-
-    border:none;
-
-    padding:10px 18px;
-
-    border-radius:8px;
-
-    cursor:pointer;
-}
-
-/* =========================
-   COMMENTS
-========================= */
-
-.comments-section{
-
-    margin-top:40px;
-
-    background:white;
-
-    padding:25px;
-
-    border-radius:12px;
-
-    box-shadow:0 2px 10px rgba(0,0,0,.08);
-}
-
-.comment{
-
-    padding:15px 0;
-
-    border-bottom:1px solid #eee;
-}
-
-.comment:last-child{
-
-    border-bottom:none;
-}
-
-/* =========================
-   ABOUT PAGE
-========================= */
+/* =====================
+ABOUT PAGE
+===================== */
 
 .about-card{
 
     background:white;
 
-    padding:40px;
-
     border-radius:12px;
 
-    box-shadow:0 2px 10px rgba(0,0,0,.08);
+    padding:35px;
 
-    margin-bottom:30px;
+    box-shadow:0 2px 10px rgba(0,0,0,.08);
 }
 
-/* =========================
-   APPLY PAGE
-========================= */
+#teamGrid{
 
-.apply-card{
+    display:grid;
 
-    max-width:900px;
+    grid-template-columns:
+    repeat(2,1fr);
 
-    margin:40px auto;
+    gap:25px;
+}
+
+/* =====================
+SEARCH RESULTS
+===================== */
+
+.search-result{
+
+    display:flex;
+
+    gap:15px;
 
     background:white;
 
-    padding:40px;
+    padding:15px;
 
     border-radius:12px;
 
-    box-shadow:0 2px 10px rgba(0,0,0,.08);
+    margin-bottom:12px;
 
-    text-align:center;
+    text-decoration:none;
+
+    color:black;
+
+    box-shadow:0 2px 10px rgba(0,0,0,.08);
 }
 
-/* =========================
-   MOBILE
-========================= */
+.search-result img{
+
+    width:90px;
+
+    height:90px;
+
+    object-fit:cover;
+
+    border-radius:10px;
+}
+
+/* =====================
+ADMIN PAGE FIXES
+===================== */
+
+.admin-layout{
+
+    display:grid;
+
+    grid-template-columns:
+    2fr 1fr;
+
+    gap:20px;
+}
+
+.form-section h2,
+.settings-section h2{
+
+    margin-bottom:15px;
+}
+
+.checkbox-row{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:10px;
+
+    margin-top:12px;
+
+    margin-bottom:12px;
+}
+
+.actions{
+
+    display:flex;
+
+    gap:8px;
+}
+
+.edit-btn,
+.delete-btn{
+
+    padding:8px 12px;
+
+    border-radius:6px;
+
+    font-size:.85rem;
+}
+
+/* =====================
+MOBILE
+===================== */
 
 @media(max-width:1100px){
 
@@ -809,12 +777,9 @@ footer{
         grid-template-columns:1fr;
     }
 
-    .stats-bar{
+    #teamGrid{
 
-        grid-template-columns:
-        repeat(2,1fr);
-
-        gap:20px;
+        grid-template-columns:1fr;
     }
 }
 
@@ -825,13 +790,11 @@ footer{
         flex-direction:column;
 
         gap:15px;
-
-        padding:20px;
     }
 
     h1{
 
-        font-size:2rem;
+        font-size:1.8rem;
 
         text-align:center;
     }
@@ -843,25 +806,12 @@ footer{
 
     .hero img{
 
-        height:350px;
+        height:300px;
     }
 
     .hero-text{
 
-        left:20px;
-
-        right:20px;
-
-        width:auto;
-
-        max-width:none;
-
-        bottom:20px;
-    }
-
-    .hero-text h2{
-
-        font-size:1.5rem;
+        width:220px;
     }
 
     .article-grid{
@@ -872,6 +822,8 @@ footer{
     .stats-bar{
 
         grid-template-columns:1fr;
+
+        gap:15px;
     }
 
     .article-title{
@@ -882,7 +834,5 @@ footer{
     .footer-links{
 
         flex-direction:column;
-
-        gap:10px;
     }
 }
