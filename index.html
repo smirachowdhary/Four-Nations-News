@@ -1,31 +1,40 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1"
+>
+
 <title>Four Nations News</title>
 
-<link rel="stylesheet" href="css/styles.css">
+<link
+    rel="stylesheet"
+    href="css/styles.css"
+>
+
 </head>
 
-<script
-    type="module"
-    src="js/newsletter.js"
-></script>
-    
 <body>
 
 <header>
 
     <div class="topbar">
 
-        <h1>Four Nations News</h1>
+        <h1>
+            Four Nations News
+        </h1>
 
         <div class="actions">
 
             <input
                 id="search"
-                placeholder="Search articles...">
+                placeholder="Search articles..."
+            >
 
         </div>
 
@@ -33,17 +42,29 @@
 
     <nav>
 
-        <a href="index.html">Home</a>
+        <a href="index.html">
+            Home
+        </a>
 
-        <a href="category.html?category=ATLA">ATLA</a>
+        <a href="category.html?category=ATLA">
+            ATLA
+        </a>
 
-        <a href="category.html?category=LOK">LOK</a>
+        <a href="category.html?category=LOK">
+            LOK
+        </a>
 
-        <a href="category.html?category=Seven Havens">Seven Havens</a>
+        <a href="category.html?category=Seven Havens">
+            Seven Havens
+        </a>
 
-        <a href="category.html?category=Books/Comics">Books / Comics</a>
+        <a href="category.html?category=Books/Comics">
+            Books / Comics
+        </a>
 
-        <a href="category.html?category=Other">Other</a>
+        <a href="category.html?category=Other">
+            Other
+        </a>
 
         <a href="about.html">
             About Team
@@ -65,16 +86,27 @@
 
     <img
         id="heroImage"
-        src="https://picsum.photos/1400/600">
+        src="https://picsum.photos/1600/700"
+    >
 
     <div class="hero-text">
 
+        <div class="featured-label">
+
+            FEATURED STORY
+
+        </div>
+
         <h2 id="heroTitle">
+
             Featured Story
+
         </h2>
 
         <p id="heroSummary">
+
             Loading featured story...
+
         </p>
 
     </div>
@@ -85,39 +117,45 @@
 
     <div class="quote-card">
 
-        <h2>Avatar Quote</h2>
+        <h2>
+            Avatar Quote
+        </h2>
 
         <blockquote>
+
             Loading quote...
+
         </blockquote>
 
         <p>
+
             Loading...
+
         </p>
 
     </div>
 
     <div class="spotlight-card">
 
-        <h2>Character Spotlight</h2>
+        <h2>
+            Character Spotlight
+        </h2>
 
         <img
             id="spotlightImage"
-            src="https://picsum.photos/300"
-            style="
-                width:100%;
-                height:220px;
-                object-fit:cover;
-                border-radius:8px;
-                margin-bottom:15px;
-            ">
+            src="https://picsum.photos/500"
+        >
 
         <h3>
+
             Loading...
+
         </h3>
 
         <p>
+
             Loading...
+
         </p>
 
     </div>
@@ -129,11 +167,15 @@
     <div>
 
         <span id="articleCount">
+
             0
+
         </span>
 
         <p>
+
             Articles
+
         </p>
 
     </div>
@@ -141,11 +183,15 @@
     <div>
 
         <span>
+
             4
+
         </span>
 
         <p>
+
             Nations
+
         </p>
 
     </div>
@@ -153,11 +199,15 @@
     <div>
 
         <span>
+
             20+
+
         </span>
 
         <p>
+
             Comics
+
         </p>
 
     </div>
@@ -165,11 +215,15 @@
     <div>
 
         <span>
+
             3
+
         </span>
 
         <p>
+
             Series
+
         </p>
 
     </div>
@@ -178,39 +232,58 @@
 
 <main>
 
-    <h2>Latest News</h2>
+    <section class="homepage-section">
 
-    <div
-        id="articleGrid"
-        class="article-grid">
+        <h2>
 
-    </div>
+            Trending Now
+
+        </h2>
+
+        <div
+            id="trendingCards"
+            class="trending-list"
+        >
+
+            Loading...
+
+        </div>
+
+    </section>
+
+    <section class="homepage-section">
+
+        <h2>
+
+            Latest News
+
+        </h2>
+
+        <div
+            id="articleGrid"
+            class="article-grid"
+        >
+
+        </div>
+
+    </section>
 
 </main>
 
-<section class="trending">
-
-    <h2>Trending Now</h2>
-
-    <div
-        id="trendingCards"
-        class="trending-cards"
-    >
-
-        Loading...
-
-    </div>
-
-</section>
-
 <section class="newsletter">
 
-    <h2>Join The Four Nations Newsletter</h2>
+    <h2>
+
+        Join The Four Nations Newsletter
+
+    </h2>
 
     <p>
+
         Get notified when new Avatar news,
-        theories, comics, and Seven Havens
-        articles are published.
+        Seven Havens updates, theories,
+        comics, and announcements are published.
+
     </p>
 
     <div class="newsletter-form">
@@ -218,24 +291,85 @@
         <input
             id="newsletterEmail"
             type="email"
-            placeholder="Enter email address"
+            placeholder="Enter your email"
         >
 
         <button
             id="subscribeBtn"
         >
+
             Subscribe
+
         </button>
 
     </div>
 
 </section>
-    
+
 <footer>
 
-    © 2026 Four Nations News
+    <div class="footer-content">
+
+        <h3>
+
+            Four Nations News
+
+        </h3>
+
+        <p>
+
+            Your source for Avatar:
+            The Last Airbender,
+            The Legend of Korra,
+            Seven Havens,
+            comics,
+            books,
+            and community news.
+
+        </p>
+
+        <div class="footer-links">
+
+            <a href="about.html">
+
+                About Team
+
+            </a>
+
+            <a href="apply.html">
+
+                Apply
+
+            </a>
+
+            <a href="category.html?category=ATLA">
+
+                ATLA
+
+            </a>
+
+            <a href="category.html?category=LOK">
+
+                LOK
+
+            </a>
+
+        </div>
+
+        <p>
+
+            © 2026 Four Nations News
+
+        </p>
+
+    </div>
 
 </footer>
+
+<script
+    type="module"
+    src="js/search.js"
+></script>
 
 <script
     type="module"
@@ -244,10 +378,9 @@
 
 <script
     type="module"
-    src="js/search.js"
+    src="js/articles.js"
 ></script>
-    
-<script type="module" src="js/articles.js"></script>
 
 </body>
+
 </html>
