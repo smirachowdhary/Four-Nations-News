@@ -23,7 +23,11 @@ async function loadSiteSettings(){
     try{
 
         const siteRef =
-            doc(db,"settings","site");
+            doc(
+                db,
+                "settings",
+                "site"
+            );
 
         const siteSnap =
             await getDoc(siteRef);
@@ -58,28 +62,42 @@ async function loadSiteSettings(){
                 "spotlightImage"
             );
 
-        if(quoteBox)
+        if(quoteBox){
+
             quoteBox.textContent =
-            `"${settings.quoteText}"`;
+                `"${settings.quoteText}"`;
 
-        if(quoteAuthor)
+        }
+
+        if(quoteAuthor){
+
             quoteAuthor.textContent =
-            `— ${settings.quoteAuthor}`;
+                `— ${settings.quoteAuthor}`;
 
-        if(spotlightTitle)
+        }
+
+        if(spotlightTitle){
+
             spotlightTitle.textContent =
-            settings.spotlightName;
+                settings.spotlightName;
 
-        if(spotlightText)
+        }
+
+        if(spotlightText){
+
             spotlightText.textContent =
-            settings.spotlightDescription;
+                settings.spotlightDescription;
+
+        }
 
         if(
             spotlightImage &&
             settings.spotlightImage
         ){
+
             spotlightImage.src =
-            settings.spotlightImage;
+                settings.spotlightImage;
+
         }
 
     }catch(error){
@@ -118,11 +136,11 @@ async function loadArticles(){
 
         (a,b)=>
 
-        (b.createdAt || 0)
+            (b.createdAt || 0)
 
-        -
+            -
 
-        (a.createdAt || 0)
+            (a.createdAt || 0)
 
     );
 
@@ -165,34 +183,40 @@ function setupHero(){
             "heroImage"
         );
 
-    if(heroTitle)
-        heroTitle.textContent =
-        featured.title;
+    if(heroTitle){
 
-    if(heroSummary)
+        heroTitle.textContent =
+            featured.title;
+
+    }
+
+    if(heroSummary){
+
         heroSummary.textContent =
-        featured.summary;
+            featured.summary;
+
+    }
 
     if(
         heroImage &&
         featured.featuredImage
     ){
+
         heroImage.src =
-        featured.featuredImage;
+            featured.featuredImage;
+
     }
 
 }
 
 function setupTrending(){
 
-    const trendingCards =
+    const trendingContainer =
         document.getElementById(
             "trendingCards"
         );
 
-    if(!trendingCards) return;
-
-    trendingCards.innerHTML = "";
+    if(!trendingContainer) return;
 
     const trendingArticles =
 
@@ -214,29 +238,31 @@ function setupTrending(){
 
         .slice(0,5);
 
-    trendingArticles.forEach(article=>{
+    trendingContainer.innerHTML = `
 
-        trendingCards.innerHTML += `
+        <ol class="trending-ranking">
 
-            <a
-                href="article.html?id=${article.id}"
-                class="trending-card"
-            >
+            ${trendingArticles.map(article => `
 
-                <img
-                    src="${
-                        article.featuredImage ||
-                        "https://picsum.photos/500"
-                    }"
-                >
+                <li>
 
-                <div>
+                    <a
+                        href="article.html?id=${article.id}"
+                    >
 
-                    <h3>
-                        ${article.title}
-                    </h3>
+                        <strong>
 
-                    <p>
+                            ${article.title}
+
+                        </strong>
+
+                    </a>
+
+                    <div class="trend-meta">
+
+                        ${article.author || "Unknown"}
+
+                        •
 
                         👁️ ${article.views || 0}
 
@@ -244,15 +270,15 @@ function setupTrending(){
 
                         👍 ${article.likes || 0}
 
-                    </p>
+                    </div>
 
-                </div>
+                </li>
 
-            </a>
+            `).join("")}
 
-        `;
+        </ol>
 
-    });
+    `;
 
 }
 
@@ -266,7 +292,7 @@ function updateStats(){
     if(articleCount){
 
         articleCount.textContent =
-        allArticles.length;
+            allArticles.length;
 
     }
 
@@ -290,14 +316,14 @@ function renderArticles(){
 
         articles =
 
-        articles.filter(
+            articles.filter(
 
-            article =>
+                article =>
 
-            article.category ===
-            pageCategory
+                article.category ===
+                pageCategory
 
-        );
+            );
 
     }
 
@@ -314,31 +340,31 @@ function renderArticles(){
 
         articles =
 
-        articles.filter(article =>
+            articles.filter(article =>
 
-            article.title
-            ?.toLowerCase()
-            .includes(search)
+                article.title
+                ?.toLowerCase()
+                .includes(search)
 
-            ||
+                ||
 
-            article.summary
-            ?.toLowerCase()
-            .includes(search)
+                article.summary
+                ?.toLowerCase()
+                .includes(search)
 
-            ||
+                ||
 
-            article.content
-            ?.toLowerCase()
-            .includes(search)
+                article.content
+                ?.toLowerCase()
+                .includes(search)
 
-            ||
+                ||
 
-            article.author
-            ?.toLowerCase()
-            .includes(search)
+                article.author
+                ?.toLowerCase()
+                .includes(search)
 
-        );
+            );
 
     }
 
@@ -354,49 +380,45 @@ function renderArticles(){
 
         articleGrid.innerHTML += `
 
-        <a
-            href="article.html?id=${article.id}"
-            class="article-link"
-        >
+            <a
+                href="article.html?id=${article.id}"
+                class="article-link"
+            >
 
-            <div class="card">
+                <div class="card">
 
-                <img
-                    src="${
-                        article.featuredImage ||
-                        "https://picsum.photos/500"
-                    }"
-                >
+                    <img
+                        src="${
+                            article.featuredImage ||
+                            "https://picsum.photos/600"
+                        }"
+                    >
 
-                <div class="card-content">
+                    <div class="card-content">
 
-                    <h3>
+                        <h3>
 
-                        ${article.title}
+                            ${article.title}
 
-                    </h3>
+                        </h3>
 
-                    <p>
+                        <p>
 
-                        ${article.summary}
+                            ${article.summary}
 
-                    </p>
+                        </p>
 
-                    <p>
-
-                        <strong>
+                        <div class="card-meta">
 
                             ${article.author}
 
-                        </strong>
+                        </div>
 
-                    </p>
+                    </div>
 
                 </div>
 
-            </div>
-
-        </a>
+            </a>
 
         `;
 
