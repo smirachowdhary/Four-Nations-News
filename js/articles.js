@@ -173,27 +173,20 @@ function setupHero(){
             "heroTitle"
         );
 
-    const heroSummary =
-        document.getElementById(
-            "heroSummary"
-        );
-
     const heroImage =
         document.getElementById(
             "heroImage"
+        );
+
+    const heroSection =
+        document.querySelector(
+            ".hero"
         );
 
     if(heroTitle){
 
         heroTitle.textContent =
             featured.title;
-
-    }
-
-    if(heroSummary){
-
-        heroSummary.textContent =
-            featured.summary;
 
     }
 
@@ -204,6 +197,21 @@ function setupHero(){
 
         heroImage.src =
             featured.featuredImage;
+
+    }
+
+    if(heroSection){
+
+        heroSection.style.cursor =
+            "pointer";
+
+        heroSection.onclick = () => {
+
+            window.location.href =
+
+            `article.html?id=${featured.id}`;
+
+        };
 
     }
 
@@ -396,6 +404,12 @@ function renderArticles(){
 
                     <div class="card-content">
 
+                        <span class="category-badge">
+
+                            ${article.category || "News"}
+
+                        </span>
+
                         <h3>
 
                             ${article.title}
@@ -404,13 +418,19 @@ function renderArticles(){
 
                         <p>
 
-                            ${article.summary}
+                            ${article.summary || ""}
 
                         </p>
 
                         <div class="card-meta">
 
-                            ${article.author}
+                            ${article.author || "Unknown"}
+
+                            <br>
+
+                            ${new Date(
+                                article.createdAt || Date.now()
+                            ).toLocaleDateString()}
 
                         </div>
 
